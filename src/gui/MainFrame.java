@@ -13,5 +13,9 @@ public class MainFrame extends JFrame{
 	public MainFrame() {
 		
 	}
+	
+	private void initMain() {
+		
+	}
 
 }
