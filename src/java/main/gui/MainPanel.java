@@ -1,20 +1,27 @@
 package gui;
 
 import java.awt.CardLayout;
-
 import javax.swing.JPanel;
 
 public class MainPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private CardLayout layout;
 	
 	private JPanel home;
 	private JPanel profile;
 	private JPanel characters;
 	private JPanel community;
-	private JPanel wiki;	
+	private JPanel wiki;
 	
-	public MainPanel() {
+	/**
+	 * Creates the panel for the center of the frame.
+	 */
+	public MainPanel() {		
 		layout = new CardLayout();
 		this.setLayout(layout);
 		
@@ -24,7 +31,22 @@ public class MainPanel extends JPanel {
 		community = new JPanel();
 		wiki = new JPanel();
 		
-		this.add(home);
-		this.add(profile);
+		this.add(home, "HOME");
+		this.add(profile, "PROFILE");
+		this.add(characters, "CHARACTERS");
+		this.add(community, "COMMUNITY");
+		this.add(wiki, "WIKI");
+		
+		layout.show(this, "HOME");
+	}
+	
+	/**
+	 * Switches the panel to display the proper panel.
+	 * @param panelName name of the panel to switch to 
+	 */
+	public void switchPanel(String panelName) {
+		if(MainFrame.PANEL_NAMES.contains(panelName)){
+			layout.show(this, panelName);
+		}
 	}
 }
