@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import gui.general.ImagePane;
+
 public class MainFrame extends JFrame{
 	/**
 	 * 
@@ -13,17 +15,20 @@ public class MainFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	public static final List<String> PANEL_NAMES;
 	private JPanel header;
+	private final static String HEADER_IMG;
 	private MainPanel main;
 	private JPanel buttons;
 	
 	static {
 		String[] panelNames = {"HOME", "PROFILE", "CHARACTERS", "COMMUNITY", "WIKI"};
 		PANEL_NAMES = Arrays.asList(panelNames);
+		
+		HEADER_IMG = "src/resources/header.png";
 	}
 	
 	public MainFrame() {
 		this.setLayout(new BorderLayout());
-		header = new HeaderPanel();
+		header = new ImagePane(HEADER_IMG, (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), 150);
 		main = new MainPanel();
 		buttons = new ButtonPanel(main);
 		

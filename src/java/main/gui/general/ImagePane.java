@@ -1,4 +1,4 @@
-package gui.mainGui;
+package gui.general;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class HeaderPanel extends JPanel {
+public class ImagePane extends JPanel {
     /**
 	 * 
 	 */
@@ -22,16 +22,15 @@ public class HeaderPanel extends JPanel {
     /**
      * Header of the application that displays the image of the header.
      */
-    public HeaderPanel() {
+    public ImagePane(String imagePath, int width, int height) {
        try {                
-          headerImg = ImageIO.read(new File("src/resources/header.png"));
+          headerImg = ImageIO.read(new File(imagePath));
           imageLoaded = true;
        } catch (IOException ex) {
             System.out.println("wtf");
             imageLoaded = false;
        }
-       this.setPreferredSize(new Dimension(
-    		   (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), 150));
+       this.setPreferredSize(new Dimension(width, height));
     }
 
     /**
@@ -44,8 +43,8 @@ public class HeaderPanel extends JPanel {
         	g.drawImage(headerImg, 0, 0, this); 
         }
         else {
-        	JLabel headerTxt = new JLabel("FANTASY RPG");
-        	this.add(headerTxt);
+        	JLabel imgTxt = new JLabel("CANNOT DISPLAY");
+        	this.add(imgTxt);
         }
     }
 

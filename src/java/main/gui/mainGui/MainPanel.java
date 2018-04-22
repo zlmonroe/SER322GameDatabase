@@ -2,6 +2,8 @@ package gui.mainGui;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
+import backend.CurrentContext;
 import gui.panels.*;
 
 public class MainPanel extends JPanel {
@@ -27,7 +29,7 @@ public class MainPanel extends JPanel {
 		this.setLayout(layout);
 		
 		home = new HomePanel();
-		profile = new ProfilePanel();
+		profile = new ProfilePanel(CurrentContext.getPlayer());
 		characters = new JPanel();
 		community = new JPanel();
 		wiki = new JPanel();

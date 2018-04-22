@@ -2,14 +2,14 @@ package backend;
 
 import java.time.LocalDate;
 
-public class CurrentPlayer {
+public class Player {
 
 	private String username;
 	private String password;
 	private double balance;
 	private LocalDate startDate;
 	
-	public CurrentPlayer(String us, String pw) {
+	public Player(String us, String pw) {
 		loadPlayer(us, pw);
 	}
 	
