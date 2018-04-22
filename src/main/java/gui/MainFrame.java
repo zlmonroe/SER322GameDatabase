@@ -1,4 +1,4 @@
-package gui;
+package java.backend.gui;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
