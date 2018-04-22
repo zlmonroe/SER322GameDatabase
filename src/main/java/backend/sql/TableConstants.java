@@ -1,4 +1,4 @@
-package backend;
+package backend.sql;
 
 /**
  * Created by zlmonroe on 4/21/2018.

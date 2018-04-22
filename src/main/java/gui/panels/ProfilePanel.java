@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import backend.CurrentContext;
-import backend.CurrentPlayer;
+import backend.Player;
 //Profile and account info of the player logged in
 public class ProfilePanel extends JPanel {
 
@@ -17,10 +17,10 @@ public class ProfilePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ProfilePanel() {
+	public ProfilePanel(Player p) {
 		JLabel myAccount = new JLabel("My Account") ;
 		
-		CurrentPlayer player = CurrentContext.getPlayer();
+		Player player = p;
 		
 		JLabel userNameL= new JLabel("Username:");
 		JLabel startDateL = new JLabel("Start Date:");

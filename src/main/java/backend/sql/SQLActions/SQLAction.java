@@ -1,4 +1,4 @@
-package backend.sql;
+package backend.sql.SQLActions;
 
 /**
  * Created by zlmonroe on 4/21/2018.

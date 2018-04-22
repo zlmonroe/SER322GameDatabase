@@ -1,10 +1,4 @@
-package backend.tables;
-
-import backend.SQLActions.Insert;
-import backend.SQLActions.SQLAction;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
+package backend.sql.tables;
 
 /**
  * Created by zlmonroe on 4/21/2018.

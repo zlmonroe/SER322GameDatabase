@@ -1,7 +1,7 @@
-package backend.tables;
+package backend.sql.tables;
 
-import backend.SQLActions.Insert;
-import backend.SQLActions.SQLAction;
+import backend.sql.SQLActions.Insert;
+import backend.sql.SQLActions.SQLAction;
 import java.util.LinkedHashMap;
 import java.util.Set;
 

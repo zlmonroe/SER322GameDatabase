@@ -1,4 +1,4 @@
-package backend.tables;
+package backend.sql.tables;
 
 import java.util.LinkedHashMap;
 

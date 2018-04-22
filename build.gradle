@@ -19,7 +19,7 @@ apply plugin: 'org.junit.platform.gradle.plugin'
 
 
 archivesBaseName = "FantasyRPG"
-mainClassName = 'backend.GameServer'
+mainClassName = 'backend.sql.GameServer'
 compileJava.options.encoding = 'UTF-8'
 
 repositories {

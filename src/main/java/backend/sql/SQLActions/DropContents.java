@@ -1,4 +1,6 @@
-package backend.sql;
+package backend.sql.SQLActions;
+
+import backend.sql.TableConstants;
 
 /**
  * Created by zlmonroe on 4/21/2018.

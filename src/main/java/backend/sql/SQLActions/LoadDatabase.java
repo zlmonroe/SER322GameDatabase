@@ -1,4 +1,4 @@
-package backend.sql;
+package backend.sql.SQLActions;
 
 import backend.sql.tables.FriendsTable;
 import backend.sql.tables.PlayersTable;

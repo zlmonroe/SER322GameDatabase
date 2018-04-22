@@ -1,11 +1,11 @@
-package backend;
+package backend.sql;
 
-import backend.SQLActions.CreateDatabase;
-import backend.SQLActions.DropContents;
-import backend.SQLActions.ListFriends;
-import backend.SQLActions.ListTables;
-import backend.SQLActions.LoadDatabase;
-import backend.SQLActions.SQLAction;
+import backend.sql.SQLActions.CreateDatabase;
+import backend.sql.SQLActions.DropContents;
+import backend.sql.SQLActions.ListFriends;
+import backend.sql.SQLActions.ListTables;
+import backend.sql.SQLActions.LoadDatabase;
+import backend.sql.SQLActions.SQLAction;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -137,7 +137,7 @@ public class GameServer {
     }
 
     /**
-     * Runs a query on the sql server after connection is established.
+     * Runs a query on the backend.sql server after connection is established.
      * @param sql an SQLAction to perform represeting a query.
      * @return A ResultSet containing all matches to the query.
      */
