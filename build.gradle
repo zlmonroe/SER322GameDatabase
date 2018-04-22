@@ -1,0 +1,34 @@
+// #buildscript
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+    //non local dependencies
+	dependencies {
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.3'
+	}
+}
+
+plugins {
+  id 'java'
+  id 'application'
+  id 'idea'
+  id 'eclipse'
+}
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+
+archivesBaseName = "FantasyRPG"
+mainClassName = 'backend.GameServer'
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+    compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+}
+run{
+ standardInput = System.in
+}
