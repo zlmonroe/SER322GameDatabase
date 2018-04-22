@@ -1,4 +1,4 @@
-package gui;
+package gui.general;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.util.Arrays;

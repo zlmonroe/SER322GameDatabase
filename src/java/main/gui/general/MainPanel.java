@@ -1,4 +1,4 @@
-package gui;
+package gui.general;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -38,6 +38,7 @@ public class MainPanel extends JPanel {
 		this.add(wiki, "WIKI");
 		
 		layout.show(this, "HOME");
+		
 	}
 	
 	/**
