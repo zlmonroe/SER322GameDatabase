@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import backend.CurrentContext;
 import gui.general.PromptTextField;
 
 //Home landing page of application.
@@ -39,7 +41,7 @@ public class HomePanel extends JPanel {
 		login.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				CurrentContext.loginPlayer(username.getText(), password.getText());
 			}
 		});
 	}
