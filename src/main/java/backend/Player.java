@@ -106,7 +106,7 @@ public class Player {
 	/**
 	 * loads this players friends from the database
 	 */
-	private void loadFriends() {
+	private void loadFriends() {//similar method will existt for characters
 		//code to load the friendsinfo from sql
 		//TODO
 	}
