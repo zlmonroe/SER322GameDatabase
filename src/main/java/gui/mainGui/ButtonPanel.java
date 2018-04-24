@@ -35,9 +35,9 @@ public class ButtonPanel extends JPanel {
 		Dimension buttonD = new Dimension(100, 100);
 		homeB = new JButton("Home");
 		homeB.setPreferredSize(buttonD);
-		profileB = new JButton("Profile");
+		profileB = new JButton("My Profile");
 		profileB.setPreferredSize(buttonD);
-		charactersB = new JButton("Characters");
+		charactersB = new JButton("My Characters");
 		charactersB.setPreferredSize(buttonD);
 		communityB = new JButton("Community");
 		communityB.setPreferredSize(buttonD);
