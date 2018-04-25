@@ -1,11 +1,19 @@
 package gui.panels;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -23,7 +31,7 @@ public class ProfilePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ProfilePanel(Player p) {
+	public ProfilePanel(Player p) throws IOException {
 		JLabel myAccount = new JLabel("My Account") ;
 		
 		Player player = p;
@@ -75,10 +83,14 @@ public class ProfilePanel extends JPanel {
 		con.gridy = 2;
 		accountInfo.add(balanceF, con);
 		
-		ImagePane profImg = new ImagePane("src/resources/profile.png", 225, 225);
+		BufferedImage myPicture = ImageIO.read(new File("src/resources/profile.png"));
+		JLabel profImg = new JLabel(new ImageIcon(myPicture.getScaledInstance(230, 230, Image.SCALE_FAST)));
+		profImg.setSize(new Dimension(230, 230));
 		
 		JLabel desc = new JLabel("Description:");
 		JTextArea description = new JTextArea("NA", 10,100);
+		description.setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width,
+				Toolkit.getDefaultToolkit().getScreenSize().height/6));
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 	    description.setBorder(BorderFactory.createCompoundBorder(border,
 	            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
