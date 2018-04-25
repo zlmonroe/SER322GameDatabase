@@ -52,7 +52,7 @@ public class MainFrame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 	    if(args.length == 1) {
 	        System.out.println("Connecting with password: "+args[0]);
             CurrentContext.startGameServer(args[0]);

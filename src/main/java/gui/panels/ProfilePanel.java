@@ -89,8 +89,9 @@ public class ProfilePanel extends JPanel {
 		
 		JLabel desc = new JLabel("Description:");
 		JTextArea description = new JTextArea("NA", 10,100);
-		description.setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width,
-				Toolkit.getDefaultToolkit().getScreenSize().height/6));
+		int descWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+		int descHeight = Toolkit.getDefaultToolkit().getScreenSize().height/6;
+		description.setSize(new Dimension(descWidth, descHeight));
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 	    description.setBorder(BorderFactory.createCompoundBorder(border,
 	            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -108,7 +109,7 @@ public class ProfilePanel extends JPanel {
 		con.gridx = 0;
 		con.gridy = 1;
 		this.add(desc, con);
-		con.gridwidth = 5;
+		con.gridwidth = Toolkit.getDefaultToolkit().getScreenSize().width/230;
 		con.gridx = 0;
 		con.gridy = 2;
 		con.anchor = GridBagConstraints.NORTHWEST;
