@@ -31,7 +31,6 @@ public class Player {
 	 * @param pw password of player to get
 	 */
 	public Player(String us, String pw) {
-		loadPlayer(us, pw);
 		loadFriends();
 		loadCharacters();
 		gs = CurrentContext.getGameServer();
@@ -135,7 +134,7 @@ public class Player {
 	 * @param us player username
 	 * @param pw player password
 	 */
-	private void loadPlayer(String us, String pw) {
+	public void loadPlayer(String us, String pw) {
 		//code to load the player info from sql
 		//TODO DONT KEEP THESE INSERTS, ACTUALLY RUN A QUERY AND VERIFY LOGIN
         this.username = us;
