@@ -113,6 +113,7 @@ public class ProfilePanel extends JPanel {
 		con.gridwidth = Toolkit.getDefaultToolkit().getScreenSize().width/230;
 		con.gridx = 0;
 		con.gridy = 2;
+		con.fill =  GridBagConstraints.BOTH;
 		con.anchor = GridBagConstraints.NORTHWEST;
 		this.add(description, con);
 	}
