@@ -1,4 +1,5 @@
 package gui.mainGui;
+import backend.CurrentContext;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -51,8 +52,15 @@ public class MainFrame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public static void main(String[] args) throws IOException {
-		MainFrame frame = new MainFrame();
-		frame.setVisible(true);
+	public static void main(String[] args) {
+	    if(args.length == 1) {
+	        System.out.println("Connecting with password: "+args[0]);
+            CurrentContext.startGameServer(args[0]);
+            MainFrame frame = new MainFrame();
+            frame.setVisible(true);
+            return;
+	    }
+	    System.out.println("Please call with your password as the only arg to test the " +
+                "application.");
 	}
 }

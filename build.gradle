@@ -19,7 +19,6 @@ apply plugin: 'org.junit.platform.gradle.plugin'
 
 
 archivesBaseName = "FantasyRPG"
-mainClassName = 'backend.sql.GameServer'
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
@@ -29,6 +28,23 @@ repositories {
 dependencies {
     compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
 }
-run{
- standardInput = System.in
+
+//gradle rungui -Ppassword="['YOUR_SQL_PASSWORD']"
+task rungui(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = "gui.mainGui.MainFrame"
+    if(project.hasProperty("password")) {
+        args Eval.me(password)
+    }
+}
+
+//gradle rungui -Ppassword="['YOUR_SQL_PASSWORD']"
+task runback(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = "backend.sql.GameServer"
+    if(project.hasProperty("password")) {
+        args Eval.me(password)
+    }
 }
