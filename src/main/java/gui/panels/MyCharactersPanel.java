@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import backend.CurrentContext;
+import backend.Item;
 import backend.Player;
 import backend.PlayerCharacter;
 import backend.Skill;
@@ -292,6 +293,8 @@ public class MyCharactersPanel extends JPanel {
 		JLabel maxWeightL = new JLabel("MaxWeight:");
 		JTextField maxWeightT;
 		
+		JLabel itemL = new JLabel("Items:");
+		
 		if(character != null) {
 			goldT = new JTextField(character.getHp());
 			weightT = new JTextField(character.getAttack());
@@ -310,6 +313,7 @@ public class MyCharactersPanel extends JPanel {
 		goldT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 		weightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 		maxWeightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+		itemL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 
 		con.anchor = GridBagConstraints.WEST;
 		con.insets = new Insets(0, 10, 10, 0);
@@ -334,11 +338,14 @@ public class MyCharactersPanel extends JPanel {
 		con.gridx = 5;
 		con.gridy = 1;
 		charPanel.add(maxWeightT, con);
+		con.gridx = 0;
+		con.gridy = 2;
+		charPanel.add(itemL, con);
 		
-		List<Skill> items = new ArrayList<Skill>();
-		for(Skill item : items) {
-			JPanel skillPanel = new JPanel();
-			skillPanel.setLayout(new GridBagLayout());
+		List<Item> items = new ArrayList<Item>();
+		for(Item item : items) {
+			JPanel itemPanel = new JPanel();
+			itemPanel.setLayout(new GridBagLayout());
 			GridBagConstraints conS = new GridBagConstraints();
 			
 			JLabel nameL = new JLabel("Name:");
@@ -350,36 +357,46 @@ public class MyCharactersPanel extends JPanel {
 			
 			if(character != null) {
 				nameT = new JTextField(item.getName());
+				weightT = new JTextField(item.getWeight());
 				efT = new JTextField(item.getEffect());
 			}
 			else {
 				nameT = new JTextField("NA");
+				weightT = new JTextField("NA");
 				efT = new JTextField("NA");
 			}
 			
 			nameT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+			weightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 			efT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 			
 			nameT.setEnabled(false);
+			weightT.setEditable(false);
 			efT.setEnabled(false);
 
 			conS.anchor = GridBagConstraints.WEST;
 			conS.gridx = 0;
 			conS.gridy = 1;
-			skillPanel.add(nameL, con);
+			itemPanel.add(nameL, con);
 			conS.gridx = 1;
 			conS.gridy = 1;
-			skillPanel.add(nameT, con);
+			itemPanel.add(nameT, con);
+			conS.gridx = 1;
+			conS.gridy = 1;
+			itemPanel.add(weightL, con);
 			conS.gridx = 2;
 			conS.gridy = 1;
-			skillPanel.add(efL, con);
+			itemPanel.add(weightT, con);
 			conS.gridx = 3;
 			conS.gridy = 1;
-			skillPanel.add(efT, con);
+			itemPanel.add(efL, con);
+			conS.gridx = 4;
+			conS.gridy = 1;
+			itemPanel.add(efT, con);
 
 			con.gridx = 0;
 			con.gridy++;
-			charPanel.add(skillPanel, conS);
+			charPanel.add(itemPanel, conS);
 		}
 		return charPanel;
 	}
