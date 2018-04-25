@@ -304,6 +304,12 @@ public class MyCharactersPanel extends JPanel {
 		}
 
 		inventoryL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 20));
+		goldL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+		weightL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+		maxWeightL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+		goldT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+		weightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+		maxWeightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 
 		con.anchor = GridBagConstraints.WEST;
 		con.insets = new Insets(0, 10, 10, 0);
@@ -337,6 +343,8 @@ public class MyCharactersPanel extends JPanel {
 			
 			JLabel nameL = new JLabel("Name:");
 			JTextField nameT;
+			JLabel weightIL = new JLabel("Weight:");
+			JTextField weightIT;
 			JLabel efL = new JLabel("Effect:");
 			JTextField efT;
 			
