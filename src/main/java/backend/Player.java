@@ -18,6 +18,7 @@ public class Player {
 	private double balance;
 	private LocalDate startDate;
 	private List<String> friends;
+	private List<String> characters;
 
 	/**
 	 * Create a player object from an existing player in the database
@@ -27,6 +28,7 @@ public class Player {
 	public Player(String us, String pw) {
 		loadPlayer(us, pw);
 		loadFriends();
+		loadCharacters();
 	}
 	
 	/**
@@ -85,6 +87,17 @@ public class Player {
 	}
 	
 	/**
+	 * adds a new character to the character list
+	 * @param pls add params as required
+	 */
+	public void addCharacter() {
+		//code to add character in sql
+	}
+	public List<String> getCharacters() {
+		return characters;
+	}
+	
+	/**
 	 * adds a new friend to the friend list
 	 * @param friendUS username of the friend to add
 	 */
@@ -97,7 +110,6 @@ public class Player {
         CurrentContext.getGameServer().execute(insert);
         loadFriends();
 	}
-	
 	/**
 	 * saves this player into the database
 	 */
@@ -120,8 +132,8 @@ public class Player {
 	/**
 	 * loads this players friends from the database
 	 */
-	private void loadFriends() {//similar method will exist for characters
-		//code to load the friend's info from sql
+	private void loadFriends() {
+		//code to load the friends' info from sql
         String uname = this.getUsername();
         GameServer gs = CurrentContext.getGameServer();
         SQLAction getFriends = new ListFriends(uname);
@@ -136,6 +148,13 @@ public class Player {
             System.out.println("Error while trying to load friends from the database");
             e.printStackTrace();
         }
-
     }
+	
+	/**
+	 * loads this players characters from the database
+	 */
+	private void loadCharacters() {
+		//code to load the characters' info from sql
+    }
+	
 }
