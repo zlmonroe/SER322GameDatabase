@@ -28,4 +28,24 @@ public class Skill {
     	//TODO
     }
     
+	public String getName() {
+		return name;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public int getCoolDown() {
+		return coolDown;
+	}
+	
+	public int getManaCost() {
+		return manaCost;
+	}
+	
+	public String getEffect() {
+		return effect;
+	}
+    
 }
