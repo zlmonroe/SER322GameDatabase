@@ -15,7 +15,8 @@ public class LoadDatabase implements SQLAction {
     @Override
     public String getAction() {
         Table[] tables = new Table[]{new PlayersTable(), new FriendsTable(), new ItemsTable(),
-                new ConsumableTable(), new ArmorTable(), new WeaponsTable(), new CharactersTable()};
+                new ConsumableTable(), new ArmorTable(), new WeaponsTable(), new CharactersTable(),
+                new PlayerCharsTable(), new NonPlayerCharsTable(), new QuestsTable()};
         StringBuilder sql = new StringBuilder();
         sql.append("CREATE SCHEMA ").append(schema).append(";\n").append("SET SEARCH_PATH TO ")
                 .append(schema).append(";\n");
