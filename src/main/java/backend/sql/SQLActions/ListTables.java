@@ -13,7 +13,7 @@ public class ListTables implements SQLAction {
     @Override
     public String getAction() {
         return "select table_name, table_schema from information_schema.tables " +
-               "where table_schema='"+schema.toLowerCase()+"';";
+               "where table_schema='"+schema+"';";
     }
 
     @Override

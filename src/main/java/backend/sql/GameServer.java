@@ -52,6 +52,17 @@ public class GameServer {
             this.execute(new LoadDatabase(schema));
         }
         else {
+            this.execute(new SQLAction() {
+                @Override
+                public String getAction() {
+                    return "SET SEARCH_PATH ="+schema+";";
+                }
+
+                @Override
+                public String getFunction() {
+                    return "set the schema";
+                }
+            });
             System.out.println("All tables were found, using existing configuration.");
         }
     }
@@ -61,7 +72,7 @@ public class GameServer {
      * @param password The password for the Postgres server
      */
     public GameServer(String password) throws SQLException {
-        this("ser322", "GameSchema", "127.0.0.1",
+        this("ser322", "gameschema", "127.0.0.1",
                 5432, "postgres", password);
     }
 
@@ -197,7 +208,7 @@ public class GameServer {
         System.out.println(q3.getAction()+"\n");
         System.out.println(q3.getFunction()+"\n");
 
-        GeneralQuery q4 = new GeneralQuery("friends", "username","zmonroe");
+        GeneralQuery q4 = new GeneralQuery("friendswith", "username","zmonroe");
         System.out.println(q4.getAction()+"\n");
         System.out.println(q4.getFunction()+"\n");
 
