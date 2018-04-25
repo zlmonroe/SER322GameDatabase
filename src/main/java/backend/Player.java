@@ -1,6 +1,7 @@
 package backend;
 
 import backend.sql.GameServer;
+import backend.sql.SQLActions.GeneralQuery;
 import backend.sql.SQLActions.Insert;
 import backend.sql.SQLActions.ListFriends;
 import backend.sql.SQLActions.ListPlayerChars;
@@ -31,9 +32,8 @@ public class Player {
 	 * @param pw password of player to get
 	 */
 	public Player(String us, String pw) {
-		loadFriends();
-		loadCharacters();
 		gs = CurrentContext.getGameServer();
+		loadPlayer(us, pw);
 	}
 	
 	/**
@@ -134,11 +134,15 @@ public class Player {
 	 * @param us player username
 	 * @param pw player password
 	 */
-	public void loadPlayer(String us, String pw) {
+	public boolean loadPlayer(String us, String pw) {
 		//code to load the player info from sql
-		//TODO DONT KEEP THESE INSERTS, ACTUALLY RUN A QUERY AND VERIFY LOGIN
-        this.username = us;
-        this.password = pw;
+        String[] atr =  {"username", "password"};
+        String[] val =  {us, pw};
+        ResultSet player = gs.querry(new GeneralQuery("players",atr, val, "AND"));
+
+		loadFriends();
+		loadCharacters();
+        return false;
 	}
 	
 	/**

@@ -34,7 +34,7 @@ public class GameServer {
     public GameServer(String database, String schema, String hostname,
                       Integer port, String user, String password) throws SQLException {
 
-        this.schema = schema;
+//        this.schema = schema;
         this.database = database;
 
         //If connection to Postgres fails or the table is incomplete, recreate it.
@@ -197,7 +197,7 @@ public class GameServer {
         System.out.println(q3.getAction()+"\n");
         System.out.println(q3.getFunction()+"\n");
 
-        GeneralQuery q4 = new GeneralQuery("friends", "username","zmonroe");
+        GeneralQuery q4 = new GeneralQuery("friendswith", "username","zmonroe");
         System.out.println(q4.getAction()+"\n");
         System.out.println(q4.getFunction()+"\n");
 
