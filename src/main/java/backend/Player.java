@@ -1,7 +1,15 @@
 package backend;
 
+import backend.sql.GameServer;
+import backend.sql.SQLActions.Insert;
+import backend.sql.SQLActions.ListFriends;
+import backend.sql.SQLActions.SQLAction;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Player {
 
@@ -9,8 +17,8 @@ public class Player {
 	private String password;
 	private double balance;
 	private LocalDate startDate;
-	private List<Player> friends;
-	
+	private List<String> friends;
+
 	/**
 	 * Create a player object from an existing player in the database
 	 * @param us user name of the player to get
@@ -72,7 +80,7 @@ public class Player {
 		return startDate;
 	}
 	
-	public List<Player> getFriends() {
+	public List<String> getFriends() {
 		return friends;
 	}
 	
@@ -80,10 +88,14 @@ public class Player {
 	 * adds a new friend to the friend list
 	 * @param friendUS username of the friend to add
 	 */
-	public void addFreind(String friendUS) {
-		//code to addf rom in sql
-		//TODO
-		loadFriends();
+	public void addFriend(String friendUS) {
+		//code to add from in sql
+
+        Insert insert = new Insert("FRIENDS", new String[]{
+                "'"+this.username+"', '"+friendUS+"'"
+        });
+        CurrentContext.getGameServer().execute(insert);
+        loadFriends();
 	}
 	
 	/**
@@ -100,14 +112,30 @@ public class Player {
 	 */
 	private void loadPlayer(String us, String pw) {
 		//code to load the player info from sql
-		//TODO
+		//TODO DONT KEEP THESE INSERTS, ACTUALLY RUN A QUERY AND VERIFY LOGIN
+        this.username = us;
+        this.password = pw;
 	}
 	
 	/**
 	 * loads this players friends from the database
 	 */
-	private void loadFriends() {//similar method will existt for characters
-		//code to load the friendsinfo from sql
-		//TODO
-	}
+	private void loadFriends() {//similar method will exist for characters
+		//code to load the friend's info from sql
+        String uname = this.getUsername();
+        GameServer gs = CurrentContext.getGameServer();
+        SQLAction getFriends = new ListFriends(uname);
+        ResultSet friendsSet = gs.querry(getFriends);
+
+        friends = new ArrayList<>();
+        try {
+            while(friendsSet.next()) {
+                friends.add(friendsSet.getString("friendName"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while trying to load friends from the database");
+            e.printStackTrace();
+        }
+
+    }
 }

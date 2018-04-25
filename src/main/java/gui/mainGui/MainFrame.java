@@ -1,4 +1,5 @@
 package gui.mainGui;
+import backend.CurrentContext;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.util.Arrays;
@@ -42,7 +43,15 @@ public class MainFrame extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		MainFrame frame = new MainFrame();
-		frame.setVisible(true);
+	    if(args.length == 1) {
+	        System.out.println("Connecting with password: "+args[0]);
+            CurrentContext.startGameServer(args[0]);
+            MainFrame frame = new MainFrame();
+            frame.setVisible(true);
+            return;
+	    }
+	    System.out.println("Please call with your password as the only arg to test the " +
+                "application.");
+
 	}
 }

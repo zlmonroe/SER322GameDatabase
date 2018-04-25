@@ -156,11 +156,14 @@ public class GameServer {
     }
 
     public static void main(String[] args) throws SQLException, IOException {
-        //Create a reader for password (not stored)
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter your password:\n");
-        //This doesn't work in my IDE, try commandline to run. (Gradle doesn't like stdin)
-        String password = stdin.readLine();
+        String password = null;
+        if(args.length == 1) {
+            password = args[0];
+        }
+        else {
+            System.err.println("Invalid number of parameters");
+            System.exit(1);
+        }
 
         //Create a GameServer object
         GameServer gs = new GameServer(password);
