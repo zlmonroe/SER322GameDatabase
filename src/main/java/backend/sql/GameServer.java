@@ -184,18 +184,17 @@ public class GameServer {
         System.out.println(q4.getAction()+"\n");
         System.out.println(q4.getFunction()+"\n");
 
-        ResultSet friends = gs.querry(q1);
+        ResultSet friends = gs.querry(q4);
 
 
         //Get meta data from result (in case column name must be found)
         ResultSetMetaData friendsMetaData = friends.getMetaData();
-        System.out.println(friendsMetaData.getColumnName(1));
+        System.out.println(friendsMetaData.getColumnName(2));
 
         //iterate through result and get the names
         while(friends.next()) {
-                System.out.println(friends.getString(1));
+                System.out.println(friends.getString(2));
         }
 
-        //System.out.println(new GeneralQuery("Players", attrs, values, "OR").getAction()+"\n");
     }
 }
