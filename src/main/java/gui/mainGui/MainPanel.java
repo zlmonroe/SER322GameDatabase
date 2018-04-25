@@ -1,6 +1,8 @@
 package gui.mainGui;
 
 import java.awt.CardLayout;
+import java.io.IOException;
+
 import javax.swing.JPanel;
 
 import backend.CurrentContext;
@@ -23,8 +25,9 @@ public class MainPanel extends JPanel {
 	
 	/**
 	 * Creates the panel for the center of the frame.
+	 * @throws IOException 
 	 */
-	public MainPanel() {		
+	public MainPanel() throws IOException {		
 		layout = new CardLayout();
 		this.setLayout(layout);
 		

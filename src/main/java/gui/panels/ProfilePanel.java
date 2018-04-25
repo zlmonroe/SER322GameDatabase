@@ -1,11 +1,19 @@
 package gui.panels;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -23,7 +31,8 @@ public class ProfilePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ProfilePanel(Player p) {
+	public ProfilePanel(Player p) throws IOException {
+		this.setBackground(Color.BLUE);
 		JLabel myAccount = new JLabel("My Account") ;
 		
 		Player player = p;
@@ -75,30 +84,38 @@ public class ProfilePanel extends JPanel {
 		con.gridy = 2;
 		accountInfo.add(balanceF, con);
 		
-		ImagePane profImg = new ImagePane("src/resources/profile.png", 225, 225);
+		BufferedImage myPicture = ImageIO.read(new File("src/resources/profile.png"));
+		JLabel profImg = new JLabel(new ImageIcon(myPicture.getScaledInstance(230, 230, Image.SCALE_FAST)));
+		profImg.setSize(new Dimension(230, 230));
 		
 		JLabel desc = new JLabel("Description:");
-		JTextArea description = new JTextArea("NA", 10,100);
+		JTextArea description = new JTextArea("NA");
+		int descWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+		int descHeight = Toolkit.getDefaultToolkit().getScreenSize().height/6;
+		//description.setPreferredSize(new Dimension(descWidth, descHeight));
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 	    description.setBorder(BorderFactory.createCompoundBorder(border,
 	            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 	    description.setEditable(false);
 		
 		this.setLayout(new GridBagLayout());
-		con.insets = new Insets(0, 0, 20, 20);
+		con.insets = new Insets(10, 10, 20, 20);
 		con.gridx = 0;
 		con.gridy = 0;
 		this.add(profImg, con);
 		con.gridx = 1;
 		con.gridy = 0;
 		this.add(accountInfo, con);
-		con.insets = new Insets(0, 0, 10, 0);
+		con.insets = new Insets(0, 10, 10, 10);
 		con.gridx = 0;
 		con.gridy = 1;
 		this.add(desc, con);
 		con.gridwidth = 5;
+		con.weightx = 1;
+		con.weighty = 1;
 		con.gridx = 0;
 		con.gridy = 2;
+		con.fill =  GridBagConstraints.BOTH;
 		con.anchor = GridBagConstraints.NORTHWEST;
 		this.add(description, con);
 	}
