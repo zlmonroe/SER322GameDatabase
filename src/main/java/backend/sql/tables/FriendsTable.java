@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 public class FriendsTable extends Table{
 
     public FriendsTable() {
-        super("FRIENDS", "username, friendName",
+        super("FRIENDSWITH", "username, friendName",
                 new String[]{
                         "username VARCHAR(20) NOT NULL",
                         "friendName VARCHAR(20) NOT NULL CHECK(friendName <> username)",

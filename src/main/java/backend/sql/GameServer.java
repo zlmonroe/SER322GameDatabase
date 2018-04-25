@@ -38,6 +38,9 @@ public class GameServer {
     public GameServer(String database, String schema, String hostname,
                       Integer port, String user, String password) throws SQLException {
 
+        this.schema = schema;
+        this.database = database;
+
         //If connection to Postgres fails or the table is incomplete, recreate it.
         if(!this.connect(hostname, port, user, password, database)) {
             System.out.println("Could not connect to the database, creating it instead.");
@@ -51,6 +54,9 @@ public class GameServer {
             this.execute(new DropContents(database, schema));;
             this.connect(hostname, port, user, password, database);
             this.execute(new LoadDatabase(schema));
+        }
+        else {
+            System.out.println("All tables were found, using existing configuration.");
         }
     }
 
@@ -93,23 +99,34 @@ public class GameServer {
      * @throws SQLException on invalid database or schema settings.
      */
     private boolean alreadyCreated() throws SQLException {
+        System.out.println("****************************************");
         boolean[] found = new boolean[TableConstants.TABLES.length];
         ResultSet rs = this.querry(new ListTables(schema));
-        while(rs != null && rs.next()) {
+        int i = 0;
+        while(rs.next()) {
             String tableName = rs.getString("table_name");
-            for(int i=0; i < TableConstants.TABLES.length; i++) {
-                if(TableConstants.TABLES[i].equals(tableName)) {
+            for(int j = 0; j < found.length; j++) {
+                if(tableName.equalsIgnoreCase(TableConstants.TABLES[j])) {
                     found[i] = true;
                 }
             }
+            if(!found[i]) {
+                System.out.println("N: "+tableName);
+                }
+            else {
+                System.out.println("Y: "+tableName);
+            }
+            i++;
+            if(i>=found.length) {
+                break;
+            }
         }
-        if (rs != null) {
-            rs.close();
-        }
+        rs.close();
         boolean foundAll = true;
         for(boolean b: found) {
             foundAll &= b;
         }
+        System.out.println("****************"+foundAll+"*******************");
         return foundAll;
     }
 
@@ -169,15 +186,18 @@ public class GameServer {
         GameServer gs = new GameServer(password);
 
         //Run an example SQLAction
-        ResultSet friends = gs.querry(new ListFriends("zmonroe"));
+        ResultSet friends = gs.querry(new ListTables(gs.schema));
 
         //Get meta data from result (in case column name must be found)
         ResultSetMetaData friendsMetaData = friends.getMetaData();
         System.out.println(friendsMetaData.getColumnName(1));
+        System.out.println(friendsMetaData.getColumnClassName(1));
 
+        System.out.println("GS:"+gs.schema);
         //iterate through result and get the names
         while(friends.next()) {
-                System.out.println(friends.getString("friendName"));
+            System.out.println(friends.getString("table_name")+"\t\t"+friends.getString
+                    ("table_schema"));
         };
     }
 }
