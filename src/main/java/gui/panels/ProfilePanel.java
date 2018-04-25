@@ -32,6 +32,7 @@ public class ProfilePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public ProfilePanel(Player p) throws IOException {
+		this.setBackground(Color.BLUE);
 		JLabel myAccount = new JLabel("My Account") ;
 		
 		Player player = p;
