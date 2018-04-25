@@ -46,7 +46,7 @@ public class MainFrame extends JFrame{
 		this.add(picLabel, BorderLayout.NORTH);
 		this.add(main, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.WEST);
-		this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+		this.setExtendedState( this.getExtendedState()|JFrame.MAXIMIZED_BOTH );;
 		this.pack();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

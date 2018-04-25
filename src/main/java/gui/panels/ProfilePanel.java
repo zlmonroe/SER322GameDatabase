@@ -89,28 +89,30 @@ public class ProfilePanel extends JPanel {
 		profImg.setSize(new Dimension(230, 230));
 		
 		JLabel desc = new JLabel("Description:");
-		JTextArea description = new JTextArea("NA", 10,100);
+		JTextArea description = new JTextArea("NA");
 		int descWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
 		int descHeight = Toolkit.getDefaultToolkit().getScreenSize().height/6;
-		description.setSize(new Dimension(descWidth, descHeight));
+		//description.setPreferredSize(new Dimension(descWidth, descHeight));
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 	    description.setBorder(BorderFactory.createCompoundBorder(border,
 	            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 	    description.setEditable(false);
 		
 		this.setLayout(new GridBagLayout());
-		con.insets = new Insets(0, 0, 20, 20);
+		con.insets = new Insets(10, 10, 20, 20);
 		con.gridx = 0;
 		con.gridy = 0;
 		this.add(profImg, con);
 		con.gridx = 1;
 		con.gridy = 0;
 		this.add(accountInfo, con);
-		con.insets = new Insets(0, 0, 10, 0);
+		con.insets = new Insets(0, 10, 10, 10);
 		con.gridx = 0;
 		con.gridy = 1;
 		this.add(desc, con);
-		con.gridwidth = Toolkit.getDefaultToolkit().getScreenSize().width/230;
+		con.gridwidth = 5;
+		con.weightx = 1;
+		con.weighty = 1;
 		con.gridx = 0;
 		con.gridy = 2;
 		con.fill =  GridBagConstraints.BOTH;
