@@ -33,7 +33,7 @@ public class MainPanel extends JPanel {
 		
 		home = new HomePanel();
 		profile = new ProfilePanel(CurrentContext.getPlayer());
-		characters = new JPanel();
+		characters = new MyCharactersPanel();
 		community = new JPanel();
 		wiki = new JPanel();
 		

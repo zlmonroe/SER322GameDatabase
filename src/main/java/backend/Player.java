@@ -3,12 +3,14 @@ package backend;
 import backend.sql.GameServer;
 import backend.sql.SQLActions.Insert;
 import backend.sql.SQLActions.ListFriends;
+import backend.sql.SQLActions.ListPlayerChars;
 import backend.sql.SQLActions.SQLAction;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 public class Player {
@@ -19,6 +21,9 @@ public class Player {
 	private LocalDate startDate;
 	private List<String> friends;
 	private List<String> characters;
+	private GameServer gs;
+
+	private Random random = new Random();
 
 	/**
 	 * Create a player object from an existing player in the database
@@ -26,9 +31,9 @@ public class Player {
 	 * @param pw password of player to get
 	 */
 	public Player(String us, String pw) {
-		loadPlayer(us, pw);
 		loadFriends();
 		loadCharacters();
+		gs = CurrentContext.getGameServer();
 	}
 	
 	/**
@@ -88,11 +93,18 @@ public class Player {
 	
 	/**
 	 * adds a new character to the character list
-	 * @param pls add params as required
+	 * @param characterName add params as required
 	 */
-	public void addCharacter() {
+	public void addCharacter(String characterName) {
 		//code to add character in sql
+		Insert insert = new Insert("CHARACTER", new String[]{
+				"'"+this.username+"', '"+characterName+"'"+", 50, 5, 100, 5, 5, 5, 1, 5, 0, 25, "+(random.nextInt(2137483647)+1)
+		});
+		gs.execute(insert);
+		loadCharacters();
 	}
+
+
 	public List<String> getCharacters() {
 		return characters;
 	}
@@ -104,10 +116,10 @@ public class Player {
 	public void addFriend(String friendUS) {
 		//code to add from in sql
 
-        Insert insert = new Insert("FRIENDS", new String[]{
+        Insert insert = new Insert("FRIENDSWITH", new String[]{
                 "'"+this.username+"', '"+friendUS+"'"
         });
-        CurrentContext.getGameServer().execute(insert);
+        gs.execute(insert);
         loadFriends();
 	}
 	/**
@@ -122,7 +134,7 @@ public class Player {
 	 * @param us player username
 	 * @param pw player password
 	 */
-	private void loadPlayer(String us, String pw) {
+	public void loadPlayer(String us, String pw) {
 		//code to load the player info from sql
 		//TODO DONT KEEP THESE INSERTS, ACTUALLY RUN A QUERY AND VERIFY LOGIN
         this.username = us;
@@ -135,7 +147,6 @@ public class Player {
 	private void loadFriends() {
 		//code to load the friends' info from sql
         String uname = this.getUsername();
-        GameServer gs = CurrentContext.getGameServer();
         SQLAction getFriends = new ListFriends(uname);
         ResultSet friendsSet = gs.querry(getFriends);
 
@@ -154,7 +165,15 @@ public class Player {
 	 * loads this players characters from the database
 	 */
 	private void loadCharacters() {
-		//code to load the characters' info from sql
+		ResultSet playChars = gs.querry(new ListPlayerChars(username));
+		characters = new ArrayList<>();
+		try {
+			while(playChars.next()) {
+				friends.add(playChars.getString("name"));
+			}
+		} catch (SQLException e) {
+			System.out.println("Error while trying to load friends from the database");
+			e.printStackTrace();
+		}
     }
-	
 }

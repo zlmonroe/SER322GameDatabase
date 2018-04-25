@@ -1,11 +1,7 @@
 package backend.sql;
 
-import backend.sql.SQLActions.CreateDatabase;
-import backend.sql.SQLActions.DropContents;
-import backend.sql.SQLActions.ListFriends;
-import backend.sql.SQLActions.ListTables;
-import backend.sql.SQLActions.LoadDatabase;
-import backend.sql.SQLActions.SQLAction;
+import backend.sql.SQLActions.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -186,18 +182,36 @@ public class GameServer {
         GameServer gs = new GameServer(password);
 
         //Run an example SQLAction
-        ResultSet friends = gs.querry(new ListTables(gs.schema));
+        String[] attrs = new String[]{"username", "balance","startDate"};
+        String[] values = new String[]{"tcuprak","61","09/30/17"};
+        GeneralQuery q1 = new GeneralQuery("Players");
+        GeneralQuery q2 =new GeneralQuery("Players", "username", "tjcuprak");
+        GeneralQuery q3 =new GeneralQuery("Players", attrs, values, "OR");
+
+        System.out.println(q1.getAction()+"\n");
+        System.out.println(q1.getFunction()+"\n");
+
+        System.out.println(q2.getAction()+"\n");
+        System.out.println(q2.getFunction()+"\n");
+
+        System.out.println(q3.getAction()+"\n");
+        System.out.println(q3.getFunction()+"\n");
+
+        GeneralQuery q4 = new GeneralQuery("friends", "username","zmonroe");
+        System.out.println(q4.getAction()+"\n");
+        System.out.println(q4.getFunction()+"\n");
+
+        ResultSet friends = gs.querry(q4);
+
 
         //Get meta data from result (in case column name must be found)
         ResultSetMetaData friendsMetaData = friends.getMetaData();
-        System.out.println(friendsMetaData.getColumnName(1));
-        System.out.println(friendsMetaData.getColumnClassName(1));
+        System.out.println(friendsMetaData.getColumnName(2));
 
         System.out.println("GS:"+gs.schema);
         //iterate through result and get the names
         while(friends.next()) {
-            System.out.println(friends.getString("table_name")+"\t\t"+friends.getString
-                    ("table_schema"));
-        };
+            System.out.println(friends.getString(2));
+        }
     }
 }
