@@ -90,9 +90,6 @@ public class ProfilePanel extends JPanel {
 		
 		JLabel desc = new JLabel("Description:");
 		JTextArea description = new JTextArea("NA");
-		int descWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-		int descHeight = Toolkit.getDefaultToolkit().getScreenSize().height/6;
-		//description.setPreferredSize(new Dimension(descWidth, descHeight));
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 	    description.setBorder(BorderFactory.createCompoundBorder(border,
 	            BorderFactory.createEmptyBorder(10, 10, 10, 10)));

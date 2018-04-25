@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 public class LocationsTable extends Table {
 
     public LocationsTable() {
-        super("Locations", "name",
+        super("Location", "name",
                 new String[] {
                         "name VARCHAR(30) NOT NULL",
                         "baseAggro INTEGER NOT NULL",

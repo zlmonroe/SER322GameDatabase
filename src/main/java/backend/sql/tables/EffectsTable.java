@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 public class EffectsTable extends Table {
 
     public EffectsTable() {
-        super("Effects", "name",
+        super("Effect", "name",
                 new String[] {
                         "name VARCHAR(30) NOT NULL",
                         "duration INTEGER",
