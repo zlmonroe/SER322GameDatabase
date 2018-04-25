@@ -1,5 +1,6 @@
 package gui.mainGui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -30,6 +31,7 @@ public class ButtonPanel extends JPanel {
 	 */
 	public ButtonPanel(MainPanel mp) {
 		mainPanel = mp;
+		this.setBackground(new Color(26, 108, 57));
 		
 		layout = new GridBagLayout();
 		Dimension buttonD = new Dimension(100, 100);

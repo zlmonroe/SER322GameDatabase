@@ -1,5 +1,6 @@
 package gui.panels;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,7 @@ public class HomePanel extends JPanel {
 	JButton login;
 	
 	public HomePanel() {
+        this.setBackground(new Color(28,152,93));
 		username = new PromptTextField("Username");
 		password = new PromptTextField("Password");
 		login = new JButton("Login");

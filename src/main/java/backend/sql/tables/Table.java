@@ -27,7 +27,7 @@ public abstract class Table implements SQLAction {
     @Override
     public String getAction() {
         StringBuilder sql = new StringBuilder();
-        sql.append("CREATE TABLE ").append(tableName).append("(\n");
+        sql.append("CREATE TABLE ").append(tableName.toUpperCase()).append("(\n");
         for(String key: keys) {
             sql.append("\t").append(key);
             if (foreingKeys!=null && foreingKeys.keySet().contains(key)) {
