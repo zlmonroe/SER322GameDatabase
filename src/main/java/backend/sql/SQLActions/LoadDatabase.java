@@ -1,8 +1,6 @@
 package backend.sql.SQLActions;
 
-import backend.sql.tables.FriendsTable;
-import backend.sql.tables.PlayersTable;
-import backend.sql.tables.Table;
+import backend.sql.tables.*;
 
 /**
  * Created by zlmonroe on 4/22/2018.
@@ -16,7 +14,8 @@ public class LoadDatabase implements SQLAction {
 
     @Override
     public String getAction() {
-        Table[] tables = new Table[]{new PlayersTable(), new FriendsTable()};
+        Table[] tables = new Table[]{new PlayersTable(), new FriendsTable(), new ItemsTable(),
+                new ConsumableTable(), new ArmorTable(), new WeaponsTable(), new CharactersTable()};
         StringBuilder sql = new StringBuilder();
         sql.append("CREATE SCHEMA ").append(schema).append(";\n").append("SET SEARCH_PATH TO ")
                 .append(schema).append(";\n");
