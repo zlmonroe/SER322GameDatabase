@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 public class HasItemsTable extends Table {
 
     public HasItemsTable() {
-        super("HasItems", "character, item",
+        super("HasItem", "character, item",
                 new String[] {
                         "character INTEGER NOT NULL",
                         "item VARCHAR(30) NOT NULL"},

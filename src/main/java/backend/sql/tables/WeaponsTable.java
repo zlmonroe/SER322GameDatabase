@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 public class WeaponsTable extends Table {
 
     public WeaponsTable() {
-        super("Weapons", "name",
+        super("Weapon", "name",
                 new String[] {
                         "name VARCHAR(30) NOT NULL",
                         "damage INTEGER"},

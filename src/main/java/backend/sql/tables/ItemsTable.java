@@ -3,7 +3,7 @@ package backend.sql.tables;
 public class ItemsTable extends Table {
 
     public ItemsTable() {
-        super("Items", "name",
+        super("Item", "name",
                 new String[]{
                         "name VARCHAR(30) NOT NULL",
                         "weight INTEGER NOT NULL",

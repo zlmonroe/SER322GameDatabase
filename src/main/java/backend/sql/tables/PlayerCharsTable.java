@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 public class PlayerCharsTable extends Table {
 
     public PlayerCharsTable() {
-        super("PlayerChars", "name",
+        super("PlayerChar", "name",
                 new String[] {
                         "name VARCHAR(30) NOT NULL",
                         "player VARCHAR(20) NOT NULL",

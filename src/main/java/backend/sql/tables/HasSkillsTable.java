@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 public class HasSkillsTable extends Table {
 
     public HasSkillsTable() {
-        super("HasSkills", "character, skill",
+        super("HasSkill", "character, skill",
                 new String[] {
                         "character INTEGER NOT NULL",
                         "skill VARCHAR(20) NOT NULL"},

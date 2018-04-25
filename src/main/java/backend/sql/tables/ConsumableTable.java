@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 public class ConsumableTable extends Table {
 
     public ConsumableTable() {
-        super("Consumables", "name",
+        super("Consumable", "name",
                 new String[] {
                         "name VARCHAR(30) NOT NULL",
                         "coolDown INTEGER"},

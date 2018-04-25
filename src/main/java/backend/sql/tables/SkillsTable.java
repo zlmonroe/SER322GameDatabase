@@ -7,7 +7,7 @@ package backend.sql.tables;
 public class SkillsTable extends Table {
 
     public SkillsTable() {
-        super("Skills", "name",
+        super("Skill", "name",
                 new String[] {
                         "name VARCHAR(20) NOT NULL",
                         "level INTEGER NOT NULL",
