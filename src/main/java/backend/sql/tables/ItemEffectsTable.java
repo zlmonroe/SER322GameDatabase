@@ -8,14 +8,14 @@ import java.util.LinkedHashMap;
 public class ItemEffectsTable extends Table {
 
     public ItemEffectsTable() {
-        super("ItemEffect", "effect, item",
+        super("ItemEffect", "item, effect",
                 new String[] {
                         "item VARCHAR(30) NOT NULL",
                         "effect VARCHAR(30) NOT NULL"},
                 new LinkedHashMap<String, String>(){
                     {
-                        put("effect","EFFECT(name)");
                         put("item","ITEM(name)");
+                        put("effect","EFFECT(name)");
                     }
                 },
                 new String[] {
