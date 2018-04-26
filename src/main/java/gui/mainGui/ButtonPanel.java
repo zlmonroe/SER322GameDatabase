@@ -32,7 +32,7 @@ public class ButtonPanel extends JPanel {
 	 */
 	public ButtonPanel(MainPanel mp) {
 		mainPanel = mp;
-		this.setBackground(new Color(26, 108, 57));
+		this.setBackground(new Color(28, 121, 25));
 		
 		layout = new GridBagLayout();
 		Dimension buttonD = new Dimension(100, 100);

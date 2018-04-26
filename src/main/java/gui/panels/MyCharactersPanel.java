@@ -6,9 +6,11 @@ import backend.Item;
 import backend.Player;
 import backend.PlayerCharacter;
 import backend.Skill;
+import gui.general.ImagePanel;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class MyCharactersPanel extends JPanel {
 
     public MyCharactersPanel() {
         currentPlayer = CurrentContext.getPlayer();
-        JPanel p = new JPanel();
+        ImagePanel p = new ImagePanel();
         if (currentPlayer != null) {
             List<String> charNames = currentPlayer.getCharacters();
             for (String name : charNames) {
@@ -263,27 +265,29 @@ public class MyCharactersPanel extends JPanel {
                 nameT = new JLabel("NA");
                 efT = new JLabel("NA");
             }
-
+            nameL.setFont(new Font(skillL.getFont().getName(), Font.BOLD, 16));
+            efL.setFont(new Font(skillL.getFont().getName(), Font.BOLD, 16));
             nameT.setFont(new Font(skillL.getFont().getName(), Font.BOLD, 16));
             efT.setFont(new Font(skillL.getFont().getName(), Font.BOLD, 16));
 
             conS.anchor = GridBagConstraints.WEST;
             conS.gridx = 0;
             conS.gridy = 1;
-            skillPanel.add(nameL, con);
+            conS.insets = new Insets(0, 20, 10, 0);
+            skillPanel.add(nameL, conS);
             conS.gridx = 1;
             conS.gridy = 1;
-            skillPanel.add(nameT, con);
+            skillPanel.add(nameT, conS);
             conS.gridx = 2;
             conS.gridy = 1;
-            skillPanel.add(efL, con);
+            skillPanel.add(efL, conS);
             conS.gridx = 3;
             conS.gridy = 1;
-            skillPanel.add(efT, con);
+            skillPanel.add(efT, conS);
 
             con.gridx = 0;
             con.gridy++;
-            charPanel.add(skillPanel, conS);
+            charPanel.add(skillPanel, con);
         }
         return charPanel;
     }

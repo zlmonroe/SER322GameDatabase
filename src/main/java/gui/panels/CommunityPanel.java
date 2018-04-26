@@ -42,7 +42,9 @@ public class CommunityPanel extends ImagePanel {
         ResultSet friends = gs.querry(new ListFriends(username));
         try {
             ResultSetTable rst = new ResultSetTable(friends);
-            characterScroller.setViewportView(rst);
+            ImagePanel imagePanel = new ImagePanel();
+            imagePanel.add(rst);
+            characterScroller.setViewportView(imagePanel);
         } catch (SQLException e) {
             e.printStackTrace();
         }
