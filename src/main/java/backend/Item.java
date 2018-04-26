@@ -10,14 +10,13 @@ public class Item {
     private String name;
     private int weight;
     private double effectMultiplier;
-    
     private List<String> effect;
-    
+
     public Item(String n) {
-    	name = n;
-    	loadItem(n);
+        name = n;
+        loadItem(n);
     }
-    
+
     public String getName() {
 		return name;
 	}
@@ -52,9 +51,9 @@ public class Item {
 		}
     	return false;
     }
-    
+
     private boolean loadEffect() {
-    	//TODO
-    	return false;
+        //TODO
+        return false;
     }
 }
