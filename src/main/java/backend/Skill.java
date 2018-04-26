@@ -45,7 +45,7 @@ public class Skill {
      * Load the effect associated with the skill
      */
     private void loadEffect() {
-    	ResultSet e = gs.querry(new GeneralQuery("skillefect","skill",name));
+    	ResultSet e = gs.querry(new GeneralQuery("skilleffect","skill",name));
     	try {
     	    if (e.next())
     	        effect = e.getString("effect");

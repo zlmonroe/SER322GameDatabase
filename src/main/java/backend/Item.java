@@ -4,6 +4,7 @@ import backend.sql.GameServer;
 import backend.sql.SQLActions.GeneralQuery;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Item {
@@ -44,7 +45,7 @@ public class Item {
 				weight = item.getInt("weight");
 				System.out.println(weight);
 				effectMultiplier = item.getDouble("effectmultiplier");
-				//loadEffect();
+				loadEffect();
 				return true;
 			}
 		} catch (SQLException e) {
@@ -54,7 +55,7 @@ public class Item {
     }
 
     private boolean loadEffect() {
-    	System.out.println(name);
+    	effect = new ArrayList<>();
     	ResultSet e = gs.querry(new GeneralQuery("itemeffect","item", name));
     	boolean foundEffect = false;
     	try {
