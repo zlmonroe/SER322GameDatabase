@@ -12,13 +12,13 @@ public class CharacterQuestsTable extends Table {
                 new String[] {
                         "playerCharacter VARCHAR(30) NOT NULL",
                         "quest VARCHAR(30) NOT NULL",
-                        "status INTEGER NOT NULL"},
+        "status INTEGER NOT NULL"},
                 new LinkedHashMap<String, String>(){
-                    {
-                        put("playerCharacter","PLAYERCHAR(name)");
-                        put("quest","QUESTS(name)");
-                    }
-                },
+            {
+                put("playerCharacter","PLAYERCHAR(name)");
+                put("quest","QUESTS(name)");
+            }
+        },
                 new String[] {
                         "'Camelot','Alex',100",
                         "'Castle Rock','Vatrica',85",
@@ -29,6 +29,6 @@ public class CharacterQuestsTable extends Table {
                         "'Mordor','Jon',50",
                         "'Kill Bill','Tim',23",
                         "'Kill Bill','Jon',100",
-                        "'Kill Bill','Alex',75"});
+        "'Kill Bill','Alex',75"});
     }
 }
