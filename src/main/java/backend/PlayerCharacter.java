@@ -234,6 +234,6 @@ public class PlayerCharacter {
             e.printStackTrace();
             e.getMessage();
         }
-        return false;
+        return foundSkills;
     }
 }
