@@ -29,7 +29,7 @@ public class MainFrame extends JFrame{
 		String[] panelNames = {"HOME", "PROFILE", "CHARACTERS", "COMMUNITY", "WIKI"};
 		PANEL_NAMES = Arrays.asList(panelNames);
 		
-		HEADER_IMG = "src/resources/header.png";
+		HEADER_IMG = "src/resources/header-v2.png";
 	}
 	
 	public MainFrame() throws IOException {
