@@ -194,7 +194,6 @@ public class PlayerCharacter {
         ResultSet quest = gs.querry(new GeneralQuery("CharacterQuest", atr, val));
         quests = new ArrayList<CharacterQuest>();
         try {
-            System.out.println("yo");
             while(quest.next()) {
                 quests.add(new CharacterQuest(quest.getInt("status"), quest.getString("quest")));
             }
