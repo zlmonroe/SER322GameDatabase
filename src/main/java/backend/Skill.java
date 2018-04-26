@@ -1,5 +1,11 @@
 package backend;
 
+import backend.sql.GameServer;
+import backend.sql.SQLActions.GeneralQuery;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Skill {
     private String name;
     private int level;
@@ -7,8 +13,11 @@ public class Skill {
     private int manaCost;
     
     private String effect;
+
+    private GameServer gs;
     
     public Skill(String n) {
+    	gs = CurrentContext.getGameServer();
     	name = n;
     	loadSkill();
     }
@@ -16,7 +25,18 @@ public class Skill {
      * Load skill from database
      */
     private void loadSkill() {
-    	//TODO
+		ResultSet s = gs.querry(new GeneralQuery("skill", "name", name));
+
+			try {
+                if (s.next()) {
+                    level = s.getInt("level");
+                    coolDown = s.getInt("cooldown");
+                    manaCost = s.getInt("manacost");
+                }
+			}catch (SQLException sqlE){
+				sqlE.printStackTrace();
+				sqlE.getMessage();
+			}
     	//after loading the rest of the skill, find the effect
     	loadEffect();
     }
@@ -25,7 +45,14 @@ public class Skill {
      * Load the effect associated with the skill
      */
     private void loadEffect() {
-    	//TODO
+    	ResultSet e = gs.querry(new GeneralQuery("skillefect","skill",name));
+    	try {
+    	    if (e.next())
+    	        effect = e.getString("effect");
+        } catch (SQLException sqlE){
+    	    sqlE.printStackTrace();
+    	    sqlE.getMessage();
+        }
     }
     
 	public String getName() {
