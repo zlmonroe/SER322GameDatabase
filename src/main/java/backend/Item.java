@@ -44,7 +44,7 @@ public class Item {
 				weight = item.getInt("weight");
 				System.out.println(weight);
 				effectMultiplier = item.getDouble("effectmultiplier");
-				loadEffect();
+				//loadEffect();
 				return true;
 			}
 		} catch (SQLException e) {
@@ -54,11 +54,12 @@ public class Item {
     }
 
     private boolean loadEffect() {
+    	System.out.println(name);
     	ResultSet e = gs.querry(new GeneralQuery("itemeffect","item", name));
     	boolean foundEffect = false;
     	try {
 			while (e.next()){
-				effect .add(e.getString("effect"));
+				effect.add(e.getString("effect"));
 				if (!foundEffect)
 					foundEffect = true;
 			}

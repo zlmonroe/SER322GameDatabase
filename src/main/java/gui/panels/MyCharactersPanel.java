@@ -238,7 +238,7 @@ public class MyCharactersPanel extends JPanel {
         GridBagConstraints con = new GridBagConstraints();
 
         JLabel skillL = new JLabel("Skills:");
-        List<Skill> skills = new ArrayList<Skill>();
+        List<Skill> skills = character.getSkills();
         skillL.setFont(new Font(skillL.getFont().getName(), Font.BOLD, 20));
 
         con.anchor = GridBagConstraints.WEST;

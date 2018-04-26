@@ -28,7 +28,7 @@ public class PlayerCharacter {
     private List<Item> items;
     private List<CharacterQuest> quests;
     private List<String> locations;
-    private List<String> skills;
+    private List<Skill> skills;
 
     private GameServer gs;
 
@@ -106,7 +106,7 @@ public class PlayerCharacter {
         return locations;
     }
 
-    public List<String> getSkills() {
+    public List<Skill> getSkills() {
         return skills;
     }
 
