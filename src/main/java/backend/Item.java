@@ -11,10 +11,13 @@ public class Item {
     private int weight;
     private double effectMultiplier;
     private List<String> effect;
+	GameServer gs;
 
     public Item(String n) {
+		gs = CurrentContext.getGameServer();
         name = n;
         loadItem(n);
+
     }
 
     public String getName() {
@@ -34,12 +37,12 @@ public class Item {
 	}
 
 	private boolean loadItem(String n) {
-		GameServer gs = CurrentContext.getGameServer();
-        ResultSet item = gs.querry(new GeneralQuery("PlayerChar","name", n));
+        ResultSet item = gs.querry(new GeneralQuery("ITEM","name", n));
         try {
 			if(item.next()) {
 				name = item.getString("name");
 				weight = item.getInt("weight");
+				System.out.println(weight);
 				effectMultiplier = item.getDouble("effectmultiplier");
 				loadEffect();
 				return true;
@@ -51,7 +54,18 @@ public class Item {
     }
 
     private boolean loadEffect() {
-        //TODO
-        return false;
+    	ResultSet e = gs.querry(new GeneralQuery("itemeffect","item", name));
+    	boolean foundEffect = false;
+    	try {
+			while (e.next()){
+				effect .add(e.getString("effect"));
+				if (!foundEffect)
+					foundEffect = true;
+			}
+		}catch (SQLException sqlE){
+    		sqlE.printStackTrace();
+    		sqlE.getMessage();
+		}
+        return foundEffect;
     }
 }

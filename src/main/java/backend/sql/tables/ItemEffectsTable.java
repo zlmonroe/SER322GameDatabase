@@ -10,8 +10,8 @@ public class ItemEffectsTable extends Table {
     public ItemEffectsTable() {
         super("ItemEffect", "effect, item",
                 new String[] {
-                        "effect VARCHAR(30) NOT NULL",
-                        "item VARCHAR(30) NOT NULL"},
+                        "item VARCHAR(30) NOT NULL",
+                        "effect VARCHAR(30) NOT NULL"},
                 new LinkedHashMap<String, String>(){
                     {
                         put("effect","EFFECT(name)");
