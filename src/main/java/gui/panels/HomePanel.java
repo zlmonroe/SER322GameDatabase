@@ -59,6 +59,14 @@ public class HomePanel extends ImagePanel {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+
+                //resetting password
+                holder = new ArrayList<>();
+                actualPassword = "";
+
+                //resetting login fields
+                username.setText("Username");
+                password.setText("Password");
             }
         });
     }

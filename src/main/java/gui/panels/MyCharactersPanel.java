@@ -74,7 +74,7 @@ public class MyCharactersPanel extends JPanel {
         charPanel.setLayout(new GridBagLayout());
         GridBagConstraints con = new GridBagConstraints();
 
-        JLabel charL = new JLabel("Charcter:");
+        JLabel charL = new JLabel("Character:");
         JLabel charT;
         JLabel levL = new JLabel("Level:");
         JLabel levT;
