@@ -28,6 +28,7 @@ public class MyCharactersPanel extends JPanel {
 	public MyCharactersPanel() {
 		currentPlayer = CurrentContext.getPlayer();
 		JPanel p = new JPanel();
+		p.setLayout(new GridBagLayout());
 		if (currentPlayer != null) {
 			List<String> charNames = currentPlayer.getCharacters();
 			for (String name : charNames) {

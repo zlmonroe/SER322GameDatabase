@@ -25,7 +25,7 @@ public class PlayerCharacter {
     private int currentCarry;
     
     private List<String> items;
-    private List<String> quests;
+    private List<CharacterQuest> quests;
     private List<String> locations;
     private List<String> skills;
 
@@ -97,7 +97,7 @@ public class PlayerCharacter {
 		return items;
 	}
 
-	public List<String> getQuests() {
+	public List<CharacterQuest> getQuests() {
 		return quests;
 	}
 
@@ -173,8 +173,18 @@ public class PlayerCharacter {
      * @return false if unsuccessfull
      */
     private boolean loadQuests() {
-    	//TODO
-    	return false;
+        String atr =  "playerCharacter";
+        String val =  charID;
+        ResultSet quest = gs.querry(new GeneralQuery("CharacterQuest",atr, val));
+        try {
+            while(quest.next()) {
+                quests.add(new CharacterQuest(quest.getInt("quest"), quest.getString("quest")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
     
     /**
