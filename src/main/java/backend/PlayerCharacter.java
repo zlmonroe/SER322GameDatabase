@@ -189,12 +189,11 @@ public class PlayerCharacter {
      * @return false if unsuccessfull
      */
     private boolean loadQuests() {
-        String atr =  "playerCharacter";
-        String val =  name;
-        ResultSet quest = gs.querry(new GeneralQuery("CharacterQuest", atr, val));
+        ResultSet quest = gs.querry(new GeneralQuery("CharacterQuest", "playercharacter", name));
         quests = new ArrayList<CharacterQuest>();
         try {
             while(quest.next()) {
+                System.out.println("Quest Found");
                 quests.add(new CharacterQuest(quest.getInt("status"), quest.getString("quest")));
             }
         } catch (SQLException e) {

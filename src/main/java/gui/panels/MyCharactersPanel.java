@@ -1,25 +1,25 @@
 package gui.panels;
 
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.border.EmptyBorder;
-
 import backend.CharacterQuest;
 import backend.CurrentContext;
 import backend.Item;
 import backend.Player;
 import backend.PlayerCharacter;
 import backend.Skill;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 //The characters of player who is logged int
 public class MyCharactersPanel extends JPanel {
@@ -29,16 +29,20 @@ public class MyCharactersPanel extends JPanel {
     public MyCharactersPanel() {
         currentPlayer = CurrentContext.getPlayer();
         JPanel p = new JPanel();
-        p.setLayout(new GridBagLayout());
         if (currentPlayer != null) {
             List<String> charNames = currentPlayer.getCharacters();
             for (String name : charNames) {
                 p.add(createCharacterPanel(new PlayerCharacter(name)));
             }
         }
-        JScrollPane s = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        s.setBorder(new EmptyBorder(0, 0, 0, 0));
-        this.add(s);
+
+
+        JScrollPane characterScroller = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        characterScroller.setAlignmentX(LEFT_ALIGNMENT);
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.add(characterScroller);
+        characterScroller.setBorder(new EmptyBorder(0, 0, 0, 0));
     }
 
     private JPanel createCharacterPanel(PlayerCharacter character) {
