@@ -22,7 +22,6 @@ import javax.swing.border.Border;
 
 import backend.CurrentContext;
 import backend.Player;
-import gui.general.ImagePane;
 //Profile and account info of the player logged in
 public class ProfilePanel extends JPanel {
 

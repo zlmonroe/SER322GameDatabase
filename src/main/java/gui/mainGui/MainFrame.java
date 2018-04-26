@@ -15,8 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import gui.general.ImagePane;
-
 public class MainFrame extends JFrame{
 	/**
 	 * 

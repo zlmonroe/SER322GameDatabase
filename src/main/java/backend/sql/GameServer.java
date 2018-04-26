@@ -34,7 +34,7 @@ public class GameServer {
     public GameServer(String database, String schema, String hostname,
                       Integer port, String user, String password) throws SQLException {
 
-//        this.schema = schema;
+    	this.schema = schema;
         this.database = database;
 
         //If connection to Postgres fails or the table is incomplete, recreate it.
