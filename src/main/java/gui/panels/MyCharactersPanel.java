@@ -35,7 +35,7 @@ public class MyCharactersPanel extends ImagePanel {
 				p.add(createCharacterPanel(new PlayerCharacter(name)));
 			}
 		}
-		JScrollPane s = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane s = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		s.setBorder(new EmptyBorder(0, 0, 0, 0));
 		this.add(s);
 	}
@@ -379,11 +379,11 @@ public class MyCharactersPanel extends ImagePanel {
 
 			if (character != null) {
 				nameT = new JTextField(item.getName());
-				weightT = new JTextField(String.valueOf(item.getWeight()));
+				weightIT = new JTextField(String.valueOf(item.getWeight()));
 				efT = new JTextField(item.getEffect());
 			} else {
 				nameT = new JTextField("NA");
-				weightT = new JTextField("NA");
+				weightIT = new JTextField("NA");
 				efT = new JTextField("NA");
 			}
 
@@ -404,10 +404,10 @@ public class MyCharactersPanel extends ImagePanel {
 			itemPanel.add(nameT, con);
 			conS.gridx = 1;
 			conS.gridy = 1;
-			itemPanel.add(weightL, con);
+			itemPanel.add(weightIL, con);
 			conS.gridx = 2;
 			conS.gridy = 1;
-			itemPanel.add(weightT, con);
+			itemPanel.add(weightIT, con);
 			conS.gridx = 3;
 			conS.gridy = 1;
 			itemPanel.add(efL, con);
@@ -421,4 +421,63 @@ public class MyCharactersPanel extends ImagePanel {
 		}
 		return charPanel;
 	}
+	
+	   private JPanel createQuestsPanel(PlayerCharacter character) {
+	        JPanel charPanel = new JPanel();
+	        charPanel.setLayout(new GridBagLayout());
+	        GridBagConstraints con = new GridBagConstraints();
+
+	        JLabel questL = new JLabel("Skills:");
+	        List<Skill> quests = new ArrayList<Skill>();
+	        questL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 20));
+
+	        con.anchor = GridBagConstraints.WEST;
+	        con.insets = new Insets(0, 10, 10, 0);
+	        con.gridx = 0;
+	        con.gridy = 0;
+	        charPanel.add(questL, con);
+
+	        for (Skill quest : quests) {
+	            JPanel questPanel = new JPanel();
+	            questPanel.setLayout(new GridBagLayout());
+	            GridBagConstraints conS = new GridBagConstraints();
+	            JLabel nameL = new JLabel("Name:");
+	            JTextField nameT;
+	            JLabel efL = new JLabel("Effect:");
+	            JTextField efT;
+
+	            if (character != null) {
+	                nameT = new JTextField(quest.getName());
+	                efT = new JTextField(quest.getEffect());
+	            } else {
+	                nameT = new JTextField("NA");
+	                efT = new JTextField("NA");
+	            }
+
+	            nameT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+	            efT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+
+	            nameT.setEditable(false);
+	            efT.setEditable(false);
+
+	            conS.anchor = GridBagConstraints.WEST;
+	            conS.gridx = 0;
+	            conS.gridy = 1;
+	            questPanel.add(nameL, con);
+	            conS.gridx = 1;
+	            conS.gridy = 1;
+	            questPanel.add(nameT, con);
+	            conS.gridx = 2;
+	            conS.gridy = 1;
+	            questPanel.add(efL, con);
+	            conS.gridx = 3;
+	            conS.gridy = 1;
+	            questPanel.add(efT, con);
+
+	            con.gridx = 0;
+	            con.gridy++;
+	            charPanel.add(questPanel, conS);
+	        }
+	        return charPanel;
+	    }
 }
