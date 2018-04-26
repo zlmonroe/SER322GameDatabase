@@ -1,26 +1,17 @@
 package gui.panels;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import backend.CurrentContext;
+import gui.general.PromptTextField;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
-
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JPanel;
-
-import backend.CurrentContext;
-import gui.general.PromptTextField;
 
 //Home landing page of application.
-public class HomePanel extends JPanel {
+public class HomePanel extends ImagePanel {
 	/**
 	 * 
 	 */
@@ -31,7 +22,6 @@ public class HomePanel extends JPanel {
 	BufferedImage image;
 	
 	public HomePanel() {
-        this.setBackground(new Color(28,152,93));
 		username = new PromptTextField("Username");
 		password = new PromptTextField("Password");
 		username.setColumns(10);
@@ -47,11 +37,6 @@ public class HomePanel extends JPanel {
 		this.add(password, con);
 		con.gridy = 2;
 		this.add(login, con);
-        try {
-            image = ImageIO.read(new File("src/resources/Background.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 	
 	private void loginAddListener() {
@@ -67,13 +52,4 @@ public class HomePanel extends JPanel {
 			}
 		});
 	}
-
-
-    @Override
-	public void paint(Graphics g) {
-	    super.paint(g);
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-	    super.paintComponents(g);
-	}
-
 }

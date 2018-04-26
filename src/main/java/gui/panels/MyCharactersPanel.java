@@ -21,7 +21,7 @@ import backend.PlayerCharacter;
 import backend.Skill;
 
 //The characters of player who is logged int
-public class MyCharactersPanel extends JPanel {
+public class MyCharactersPanel extends ImagePanel {
 	private Player currentPlayer;
 	
 

@@ -1,6 +1,7 @@
 package gui.general;
 
 import java.awt.AlphaComposite;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.FocusEvent;
@@ -23,6 +24,7 @@ public class PromptTextField extends JTextField {
         this.setText(prompt);
         initFocus();
         setOpaque(false);
+        this.setFont(new Font(this.getFont().getName(), Font.BOLD, 30));
     }
 
     public PromptTextField(String p, String i) {
@@ -62,7 +64,7 @@ public class PromptTextField extends JTextField {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setComposite(AlphaComposite.SrcOver.derive(0.5f));
+        g2d.setComposite(AlphaComposite.SrcOver.derive(0.65f));
         super.paint(g2d);
         g2d.dispose();
     }
