@@ -90,7 +90,8 @@ public class GameWikiPanel extends ImagePanel {
         try {
             ResultSetTable results = new ResultSetTable(queriedResults);
             ImagePanel refreshedView = new ImagePanel();
-            refreshedView.add(results);
+            refreshedView.add(results.getTableHeader(), BorderLayout.PAGE_START);
+            refreshedView.add(results,BorderLayout.CENTER);
             refreshedView.setLayout(new BoxLayout(refreshedView, BoxLayout.PAGE_AXIS));
             scroll.setViewportView(refreshedView);
             scroll.revalidate();

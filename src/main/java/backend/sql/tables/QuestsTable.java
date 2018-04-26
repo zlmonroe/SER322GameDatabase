@@ -23,11 +23,11 @@ public class QuestsTable extends Table {
                     }
                 },
                 new String[] {
-                        "'Camelot', 1, 1000000, 50, 'Seyyid Mamuka', 'Iron Sword'",
-                        "'Castle Rock', 2, 5000, 25, 'Shungoun Dain', 'Mana Regeneration'",
-                        "'Mordor', 3, 23000, 30, 'Dougal Archibald', 'Supser Instant Health'",
-                        "'NO WAY JOSE', 4, 50000, 45, 'Alexandre Uilleam', 'Stone Arrow'",
-                        "'Mother Dearest', 5, 32000, 32, 'Neilina Gus', 'Stone Arrow'",
-                        "'Kill Bill', 6, 120000, 11, 'Eoghan Colin', 'Fire Sword'"});
+                        "'Camelot', 1, 1000000, 50, 'Iron Sword', 'Seyyid Mamuka'",
+                        "'Castle Rock', 2, 5000, 25, 'Mana Regeneration', 'Shungoun Dain'",
+                        "'Mordor', 3, 23000, 30, 'Supser Instant Health', 'Dougal Archibald'",
+                        "'NO WAY JOSE', 4, 50000, 45, 'Stone Arrow', 'Alexandre Uilleam'",
+                        "'Mother Dearest', 5, 32000, 32, 'Stone Arrow', 'Neilina Gus'",
+                        "'Kill Bill', 6, 120000, 11, 'Fire Sword', 'Eoghan Colin'"});
     }
 }

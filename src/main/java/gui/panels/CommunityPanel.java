@@ -6,7 +6,8 @@ import backend.sql.GameServer;
 import backend.sql.SQLActions.ListFriends;
 import backend.sql.tables.Table;
 import gui.general.ResultSetTable;
-import java.awt.Label;
+
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.BoxLayout;
@@ -43,7 +44,8 @@ public class CommunityPanel extends ImagePanel {
         try {
             ResultSetTable rst = new ResultSetTable(friends);
             ImagePanel imagePanel = new ImagePanel();
-            imagePanel.add(rst);
+            imagePanel.add(rst.getTableHeader(), BorderLayout.PAGE_START);
+            imagePanel.add(rst,BorderLayout.CENTER);
             imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.PAGE_AXIS));
             characterScroller.setViewportView(imagePanel);
         } catch (SQLException e) {
