@@ -111,6 +111,11 @@ public class ButtonPanel extends JPanel {
 		communityB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					mainPanel.refresh();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				mainPanel.switchPanel("COMMUNITY");
 			}
 		});

@@ -62,5 +62,6 @@ public class MainPanel extends JPanel {
         characters = new MyCharactersPanel();
         this.add(profile, "PROFILE");
         this.add(characters, "CHARACTERS");
+        ((CommunityPanel)this.community).updateSQL();
     }
 }

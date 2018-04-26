@@ -6,6 +6,7 @@ import backend.sql.GameServer;
 import backend.sql.SQLActions.ListFriends;
 import backend.sql.tables.Table;
 import gui.general.ResultSetTable;
+import java.awt.Label;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.BoxLayout;
@@ -18,11 +19,11 @@ import javax.swing.border.EmptyBorder;
 
 //Community, for viewing friends' profiles and searching for other players
 public class CommunityPanel extends ImagePanel {
-    private ResultSetTable rst;
+    private JScrollPane characterScroller;
 
     public CommunityPanel() {
-        ResultSetTable rst = null;
-        JScrollPane characterScroller = new JScrollPane(null, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        Label l = new Label("You have to login before you can view your friends!");
+        characterScroller = new JScrollPane(l, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         characterScroller.setAlignmentX(LEFT_ALIGNMENT);
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -30,13 +31,18 @@ public class CommunityPanel extends ImagePanel {
         characterScroller.setBorder(new EmptyBorder(0, 0, 0, 0));
     }
 
-    public void update() {
+    public void updateSQL() {
         Player player = CurrentContext.getPlayer();
         GameServer gs = CurrentContext.getGameServer();
+         if(player == null || gs == null) {
+            return;
+        }
         String username = player.getUsername();
+        System.out.println("Set community page for: "+username);
         ResultSet friends = gs.querry(new ListFriends(username));
         try {
-            rst.setModel(ResultSetTable.buildTableModel(friends));
+            ResultSetTable rst = new ResultSetTable(friends);
+            characterScroller.setViewportView(rst);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -12,7 +12,7 @@ public class ListFriends implements SQLAction {
 
     @Override
     public String getAction() {
-        return "SELECT FRIENDSWITH.friendname as username, PLAYERS.startdate as startdate FROM " +
+        return "SELECT FRIENDSWITH.friendname as friendname, PLAYERS.startdate as startdate FROM " +
                 "FRIENDSWITH JOIN PLAYERS ON (FRIENDSWITH.username = PLAYERS.username) WHERE " +
                 "PLAYERS.username='"+this
                 .player+"';";

@@ -22,6 +22,7 @@ public class HomePanel extends ImagePanel {
     PromptTextField username;
     PromptTextField password;
     JButton login;
+    BufferedImage image;
 
     public HomePanel() {
         username = new PromptTextField("Username");
