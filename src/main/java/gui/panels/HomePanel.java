@@ -34,6 +34,8 @@ public class HomePanel extends JPanel {
         this.setBackground(new Color(28,152,93));
 		username = new PromptTextField("Username");
 		password = new PromptTextField("Password");
+		username.setColumns(10);
+		password.setColumns(10);
 		login = new JButton("Login");
 		loginAddListener();
 		this.setLayout(new GridBagLayout());

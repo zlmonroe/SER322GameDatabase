@@ -35,7 +35,7 @@ public class GameServer {
      */
     public GameServer(String database, String schema, String hostname,
                       Integer port, String user, String password) throws SQLException {
-
+        
         this.schema = schema;
         this.database = database;
 

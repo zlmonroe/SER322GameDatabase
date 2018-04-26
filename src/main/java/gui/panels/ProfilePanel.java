@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -22,7 +23,6 @@ import javax.swing.border.Border;
 
 import backend.CurrentContext;
 import backend.Player;
-import gui.general.ImagePane;
 //Profile and account info of the player logged in
 public class ProfilePanel extends JPanel {
 
@@ -46,7 +46,7 @@ public class ProfilePanel extends JPanel {
 		
 		if(player != null) {
 			userNameF = new JTextField(player.getUsername());
-			startDateF= new JTextField(player.getStartDate().toString());
+			startDateF= new JTextField(player.getStartDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 			balanceF = new JTextField(String.valueOf(player.getBalance()));
 		}
 		else {
@@ -54,9 +54,14 @@ public class ProfilePanel extends JPanel {
 			startDateF= new JTextField("NA",7);
 			balanceF = new JTextField("NA",7);
 		}
+		
 		userNameF.setEditable(false);
 		startDateF.setEditable(false);
 		balanceF.setEditable(false);
+		
+		userNameF.setColumns(8);
+		startDateF.setColumns(8);
+		balanceF.setColumns(8);
 		
 		JPanel accountInfo = new JPanel();
 

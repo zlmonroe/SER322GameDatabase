@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -21,15 +23,20 @@ import backend.Skill;
 //The characters of player who is logged int
 public class MyCharactersPanel extends JPanel {
 	private Player currentPlayer;
+	
 
 	public MyCharactersPanel() {
 		currentPlayer = CurrentContext.getPlayer();
+		JPanel p = new JPanel();
 		if (currentPlayer != null) {
 			List<String> charNames = currentPlayer.getCharacters();
 			for (String name : charNames) {
-				this.add(createCharacterPanel(new PlayerCharacter(name)));
+				p.add(createCharacterPanel(new PlayerCharacter(name)));
 			}
 		}
+		JScrollPane s = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		s.setBorder(new EmptyBorder(0, 0, 0, 0));
+		this.add(s);
 	}
 
 	private JPanel createCharacterPanel(PlayerCharacter character) {
@@ -49,6 +56,7 @@ public class MyCharactersPanel extends JPanel {
 		charPanel.add(createStatsPanel(character), con);
 		con.gridy = 3;
 		charPanel.add(createInventoryPanel(character), con);
+		
 		return charPanel;
 	}
 
