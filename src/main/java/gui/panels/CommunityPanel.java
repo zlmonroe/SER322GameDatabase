@@ -44,6 +44,7 @@ public class CommunityPanel extends ImagePanel {
             ResultSetTable rst = new ResultSetTable(friends);
             ImagePanel imagePanel = new ImagePanel();
             imagePanel.add(rst);
+            imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.PAGE_AXIS));
             characterScroller.setViewportView(imagePanel);
         } catch (SQLException e) {
             e.printStackTrace();
