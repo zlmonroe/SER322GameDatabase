@@ -10,9 +10,9 @@ public class CharacterQuestsTable extends Table {
     public CharacterQuestsTable() {
         super("CharacterQuest", "playerCharacter, quest",
                 new String[] {
-                        "playerCharacter VARCHAR(30) NOT NULL",
                         "quest VARCHAR(30) NOT NULL",
-        "status INTEGER NOT NULL"},
+                        "playerCharacter VARCHAR(30) NOT NULL",
+                        "status INTEGER NOT NULL"},
                 new LinkedHashMap<String, String>(){
             {
                 put("playerCharacter","PLAYERCHAR(name)");
