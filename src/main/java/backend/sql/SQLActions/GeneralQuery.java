@@ -11,20 +11,26 @@ public class GeneralQuery implements SQLAction  {
 
     public GeneralQuery(String table, String[] attributes, String[] values, String opperand) {
         query.append(table.toUpperCase());
+        if (attributes.length == 0)
+            attributes = null;
+        if (values.length == 0)
+            values = null;
         if(attributes!=null && values!=null){
-            query.append(" WHERE "+attributes[0]+"='"+values[0]+"'");
             try {
                 if (attributes.length != values.length) {
                     System.out.println("array size mismatch error");
                     throw new SQLException("Mismatch in size of attributes and values arrays. attributes was size " + attributes.length +
                             ", values was size " + values.length + ".");
-                } else if (attributes.length > 1) {
-                    if (opperand.toUpperCase().compareTo("AND") != 0 && opperand.toUpperCase().compareTo("OR") != 0) {
-                        System.out.println("Invalid Opperator error");
-                        throw new SQLException("Invalid opperand type. should be \"AND\" or \"OR\", was \"" + opperand + "\"");
-                    } else {
-                        for (int i = 1; i < attributes.length; i++) {
-                            query.append(" " + opperand + " " + attributes[i] + "='" + values[i] + "'");
+                }else{
+                    query.append(" WHERE "+attributes[0]+"='"+values[0]+"'");
+                    if (attributes.length > 1) {
+                        if (opperand.toUpperCase().compareTo("AND") != 0 && opperand.toUpperCase().compareTo("OR") != 0) {
+                            System.out.println("Invalid Opperator error");
+                            throw new SQLException("Invalid opperand type. should be \"AND\" or \"OR\", was \"" + opperand + "\"");
+                        } else {
+                            for (int i = 1; i < attributes.length; i++) {
+                                query.append(" " + opperand + " " + attributes[i] + "='" + values[i] + "'");
+                            }
                         }
                     }
                 }
