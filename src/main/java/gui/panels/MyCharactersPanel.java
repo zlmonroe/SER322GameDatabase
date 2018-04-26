@@ -17,19 +17,21 @@ import backend.Item;
 import backend.Player;
 import backend.PlayerCharacter;
 import backend.Skill;
+
 //The characters of player who is logged int
 public class MyCharactersPanel extends JPanel {
 	private Player currentPlayer;
 
 	public MyCharactersPanel() {
-		List<String> charNames = new ArrayList<String>();
-		charNames.add("t");
-		charNames.add("p");
-		for(String name : charNames) {
-			this.add(createCharacterPanel(null));
+		currentPlayer = CurrentContext.getPlayer();
+		if (currentPlayer != null) {
+			List<String> charNames = currentPlayer.getCharacters();
+			for (String name : charNames) {
+				this.add(createCharacterPanel(new PlayerCharacter(name)));
+			}
 		}
 	}
-	
+
 	private JPanel createCharacterPanel(PlayerCharacter character) {
 		JPanel charPanel = new JPanel();
 		charPanel.setLayout(new GridBagLayout());
@@ -49,41 +51,40 @@ public class MyCharactersPanel extends JPanel {
 		charPanel.add(createInventoryPanel(character), con);
 		return charPanel;
 	}
-	
+
 	private JPanel createBasicsPanel(PlayerCharacter character) {
 		JPanel charPanel = new JPanel();
 		charPanel.setLayout(new GridBagLayout());
 		GridBagConstraints con = new GridBagConstraints();
-		
+
 		JLabel charL = new JLabel("Charcter:");
 		JTextField charT;
 		JLabel levL = new JLabel("Level:");
 		JTextField levT;
 		JLabel xpL = new JLabel("Experience:");
 		JTextField xpT;
-		
-		if(character != null) {
+
+		if (character != null) {
 			charT = new JTextField(character.getName());
-			levT = new JTextField(character.getLevel());
-			xpT = new JTextField(character.getXp());
-		}
-		else {
+			levT = new JTextField(String.valueOf(character.getLevel()));
+			xpT = new JTextField(String.valueOf(character.getXp()));
+		} else {
 			charT = new JTextField("NA");
 			levT = new JTextField("NA");
 			xpT = new JTextField("NA");
 		}
-		
+
 		charL.setFont(new Font(charL.getFont().getName(), Font.BOLD, 24));
 		levL.setFont(new Font(charL.getFont().getName(), Font.BOLD, 20));
 		xpL.setFont(new Font(charL.getFont().getName(), Font.BOLD, 20));
-		
+
 		charT.setFont(new Font(charL.getFont().getName(), Font.BOLD, 24));
 		levT.setFont(new Font(charL.getFont().getName(), Font.BOLD, 20));
 		xpT.setFont(new Font(charL.getFont().getName(), Font.BOLD, 20));
-		
-		charT.setEnabled(false);
-		levT.setEnabled(false);
-		xpT.setEnabled(false);
+
+		charT.setEditable(false);
+		levT.setEditable(false);
+		xpT.setEditable(false);
 
 		con.anchor = GridBagConstraints.WEST;
 		con.insets = new Insets(0, 10, 10, 0);
@@ -105,79 +106,78 @@ public class MyCharactersPanel extends JPanel {
 		con.gridx = 3;
 		con.gridy = 1;
 		charPanel.add(xpT, con);
-		
+
 		return charPanel;
 	}
-	
+
 	private JPanel createStatsPanel(PlayerCharacter character) {
 		JPanel charPanel = new JPanel();
 		charPanel.setLayout(new GridBagLayout());
 		GridBagConstraints con = new GridBagConstraints();
-		
+
 		JLabel statsL = new JLabel("Charcter:");
-		
+
 		JLabel hpL = new JLabel("Hit Points:");
 		JTextField hpT;
 		JLabel attackL = new JLabel("Attack:");
 		JTextField attackT;
 		JLabel sightL = new JLabel("Sight:");
 		JTextField sightT;
-		
+
 		JLabel manaL = new JLabel("Mana:");
 		JTextField manaT;
 		JLabel defenseL = new JLabel("Defense:");
 		JTextField defenseT;
 		JLabel speedL = new JLabel("Speed:");
 		JTextField speedT;
-		
-		if(character != null) {
-			hpT = new JTextField(character.getHp());
-			attackT = new JTextField(character.getAttack());
-			sightT = new JTextField(character.getSight());
-			
-			manaT = new JTextField(character.getMana());
-			defenseT = new JTextField(character.getDefense());
-			speedT = new JTextField(character.getSpeed());
-		}
-		else {
+
+		if (character != null) {
+			hpT = new JTextField(String.valueOf(character.getHp()));
+			attackT = new JTextField(String.valueOf(character.getAttack()));
+			sightT = new JTextField(String.valueOf(character.getSight()));
+
+			manaT = new JTextField(String.valueOf(character.getMana()));
+			defenseT = new JTextField(String.valueOf(character.getDefense()));
+			speedT = new JTextField(String.valueOf(character.getSpeed()));
+		} else {
 			hpT = new JTextField("NA");
 			attackT = new JTextField("NA");
 			sightT = new JTextField("NA");
-			
+
 			manaT = new JTextField("NA");
 			defenseT = new JTextField("NA");
 			speedT = new JTextField("NA");
 		}
-		
+
 		statsL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 20));
-		
+
 		hpL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		attackL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		sightL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		manaL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		defenseL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		speedL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
-		
+
 		hpT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		attackT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		sightT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		manaT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		defenseT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		speedT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
-		
-		hpT.setEnabled(false);
-		attackT.setEnabled(false);
-		sightT.setEnabled(false);
-		manaT.setEnabled(false);
-		defenseT.setEnabled(false);
-		speedT.setEnabled(false);
+
+		hpT.setEditable(false);
+		attackT.setEditable(false);
+		sightT.setEditable(false);
+		manaT.setEditable(false);
+		defenseT.setEditable(false);
+		speedT.setEditable(false);
 
 		con.anchor = GridBagConstraints.WEST;
 		con.insets = new Insets(0, 10, 10, 0);
 		con.gridx = 0;
 		con.gridy = 0;
 		charPanel.add(statsL, con);
-		
+
 		con.gridx = 0;
 		con.gridy = 1;
 		charPanel.add(hpL, con);
@@ -196,7 +196,7 @@ public class MyCharactersPanel extends JPanel {
 		con.gridx = 5;
 		con.gridy = 1;
 		charPanel.add(sightT, con);
-		
+
 		con.gridx = 0;
 		con.gridy = 2;
 		charPanel.add(manaL, con);
@@ -215,15 +215,15 @@ public class MyCharactersPanel extends JPanel {
 		con.gridx = 5;
 		con.gridy = 2;
 		charPanel.add(speedT, con);
-		
+
 		return charPanel;
 	}
-	
+
 	private JPanel createSkillsPanel(PlayerCharacter character) {
 		JPanel charPanel = new JPanel();
 		charPanel.setLayout(new GridBagLayout());
 		GridBagConstraints con = new GridBagConstraints();
-		
+
 		JLabel skillL = new JLabel("Skills:");
 		List<Skill> skills = new ArrayList<Skill>();
 		skillL.setFont(new Font(skillL.getFont().getName(), Font.BOLD, 20));
@@ -233,8 +233,8 @@ public class MyCharactersPanel extends JPanel {
 		con.gridx = 0;
 		con.gridy = 0;
 		charPanel.add(skillL, con);
-		
-		for(Skill skill : skills) {
+
+		for (Skill skill : skills) {
 			JPanel skillPanel = new JPanel();
 			skillPanel.setLayout(new GridBagLayout());
 			GridBagConstraints conS = new GridBagConstraints();
@@ -242,21 +242,20 @@ public class MyCharactersPanel extends JPanel {
 			JTextField nameT;
 			JLabel efL = new JLabel("Effect:");
 			JTextField efT;
-			
-			if(character != null) {
+
+			if (character != null) {
 				nameT = new JTextField(skill.getName());
 				efT = new JTextField(skill.getEffect());
-			}
-			else {
+			} else {
 				nameT = new JTextField("NA");
 				efT = new JTextField("NA");
 			}
-			
+
 			nameT.setFont(new Font(skillL.getFont().getName(), Font.BOLD, 16));
 			efT.setFont(new Font(skillL.getFont().getName(), Font.BOLD, 16));
-			
-			nameT.setEnabled(false);
-			efT.setEnabled(false);
+
+			nameT.setEditable(false);
+			efT.setEditable(false);
 
 			conS.anchor = GridBagConstraints.WEST;
 			conS.gridx = 0;
@@ -278,29 +277,28 @@ public class MyCharactersPanel extends JPanel {
 		}
 		return charPanel;
 	}
-	
+
 	private JPanel createInventoryPanel(PlayerCharacter character) {
 		JPanel charPanel = new JPanel();
 		charPanel.setLayout(new GridBagLayout());
 		GridBagConstraints con = new GridBagConstraints();
-		
+
 		JLabel inventoryL = new JLabel("Inventory:");
-		
+
 		JLabel goldL = new JLabel("Gold:");
 		JTextField goldT;
 		JLabel weightL = new JLabel("Weight:");
 		JTextField weightT;
 		JLabel maxWeightL = new JLabel("MaxWeight:");
 		JTextField maxWeightT;
-		
+
 		JLabel itemL = new JLabel("Items:");
-		
-		if(character != null) {
-			goldT = new JTextField(character.getHp());
-			weightT = new JTextField(character.getAttack());
-			maxWeightT = new JTextField(character.getSight());
-		}
-		else {
+
+		if (character != null) {
+			goldT = new JTextField(String.valueOf(character.getHp()));
+			weightT = new JTextField(String.valueOf(character.getCurrentCarry()));
+			maxWeightT = new JTextField(String.valueOf(character.getMaxCarryWeight()));
+		} else {
 			goldT = new JTextField("NA");
 			weightT = new JTextField("NA");
 			maxWeightT = new JTextField("NA");
@@ -314,6 +312,10 @@ public class MyCharactersPanel extends JPanel {
 		weightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 		maxWeightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 		itemL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+
+		goldT.setEditable(false);
+		weightT.setEditable(false);
+		maxWeightT.setEditable(false);
 
 		con.anchor = GridBagConstraints.WEST;
 		con.insets = new Insets(0, 10, 10, 0);
@@ -341,38 +343,37 @@ public class MyCharactersPanel extends JPanel {
 		con.gridx = 0;
 		con.gridy = 2;
 		charPanel.add(itemL, con);
-		
+
 		List<Item> items = new ArrayList<Item>();
-		for(Item item : items) {
+		for (Item item : items) {
 			JPanel itemPanel = new JPanel();
 			itemPanel.setLayout(new GridBagLayout());
 			GridBagConstraints conS = new GridBagConstraints();
-			
+
 			JLabel nameL = new JLabel("Name:");
 			JTextField nameT;
 			JLabel weightIL = new JLabel("Weight:");
 			JTextField weightIT;
 			JLabel efL = new JLabel("Effect:");
 			JTextField efT;
-			
-			if(character != null) {
+
+			if (character != null) {
 				nameT = new JTextField(item.getName());
-				weightT = new JTextField(item.getWeight());
+				weightT = new JTextField(String.valueOf(item.getWeight()));
 				efT = new JTextField(item.getEffect());
-			}
-			else {
+			} else {
 				nameT = new JTextField("NA");
 				weightT = new JTextField("NA");
 				efT = new JTextField("NA");
 			}
-			
+
 			nameT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 			weightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 			efT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
-			
-			nameT.setEnabled(false);
+
+			nameT.setEditable(false);
 			weightT.setEditable(false);
-			efT.setEnabled(false);
+			efT.setEditable(false);
 
 			conS.anchor = GridBagConstraints.WEST;
 			conS.gridx = 0;

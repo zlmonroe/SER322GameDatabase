@@ -32,7 +32,7 @@ public class MainPanel extends JPanel {
 		this.setLayout(layout);
 		
 		home = new HomePanel();
-		profile = new ProfilePanel(CurrentContext.getPlayer());
+		profile = new ProfilePanel();
 		characters = new MyCharactersPanel();
 		community = new JPanel();
 		wiki = new JPanel();
@@ -55,5 +55,12 @@ public class MainPanel extends JPanel {
 		if(MainFrame.PANEL_NAMES.contains(panelName)){
 			layout.show(this, panelName);
 		}
+	}
+	
+	public void refresh() throws IOException {
+		profile = new ProfilePanel();
+		characters = new MyCharactersPanel();
+		this.add(profile, "PROFILE");
+		this.add(characters, "CHARACTERS");
 	}
 }

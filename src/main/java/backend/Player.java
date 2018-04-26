@@ -9,6 +9,7 @@ import backend.sql.SQLActions.SQLAction;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -30,10 +31,10 @@ public class Player {
 	 * Create a player object from an existing player in the database
 	 * @param us user name of the player to get
 	 * @param pw password of player to get
+	 * @throws SQLException 
 	 */
-	public Player(String us, String pw) {
+	public Player(String us, String pw){
 		gs = CurrentContext.getGameServer();
-		loadPlayer(us, pw);
 	}
 	
 	/**
@@ -133,15 +134,23 @@ public class Player {
 	 * loads an existing player from the database
 	 * @param us player username
 	 * @param pw player password
+	 * @throws SQLException 
 	 */
-	public boolean loadPlayer(String us, String pw) {
+	public boolean loadPlayer(String us, String pw) throws SQLException {
 		//code to load the player info from sql
         String[] atr =  {"username", "password"};
         String[] val =  {us, pw};
         ResultSet player = gs.querry(new GeneralQuery("players",atr, val, "AND"));
-
-		loadFriends();
-		loadCharacters();
+        if(player.next()) {
+        	System.out.println(player);
+        	username = us;
+        	password = pw;
+        	startDate = player.getDate("startDate").toLocalDate();
+        	balance = player.getDouble("balance");
+    		loadFriends();
+    		loadCharacters();
+    		return true;
+        }
         return false;
 	}
 	
@@ -173,7 +182,7 @@ public class Player {
 		characters = new ArrayList<>();
 		try {
 			while(playChars.next()) {
-				friends.add(playChars.getString("name"));
+				characters.add(playChars.getString("name"));
 			}
 		} catch (SQLException e) {
 			System.out.println("Error while trying to load friends from the database");

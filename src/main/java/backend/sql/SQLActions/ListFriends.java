@@ -12,7 +12,7 @@ public class ListFriends implements SQLAction {
 
     @Override
     public String getAction() {
-        return "SELECT friendName FROM FRIENDS " +
+        return "SELECT friendName FROM FRIENDSWITH " +
                 "WHERE username='"+this.player+"';";
     }
 

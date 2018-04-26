@@ -1,6 +1,11 @@
 package backend;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+
+import backend.sql.GameServer;
+import backend.sql.SQLActions.GeneralQuery;
 
 public class PlayerCharacter {
     private String name;
@@ -23,8 +28,11 @@ public class PlayerCharacter {
     private List<String> quests;
     private List<String> locations;
     private List<String> skills;
-    
+
+	private GameServer gs;
+	
     public PlayerCharacter(String n) {
+    	gs = CurrentContext.getGameServer();
     	name = n;
     	loadCharacter(n);
     }
@@ -108,12 +116,36 @@ public class PlayerCharacter {
      */
     private boolean loadCharacter(String n) {
     	//TODO
-    	//After loading the basic attributes of the character, load the relationships:
-    	
-    	loadItems();
-    	loadLocations();
-    	loadQuests();
-    	loadSkills();
+        String atr =  "name";
+        String val =  n;
+        ResultSet item = gs.querry(new GeneralQuery("PlayerChar",atr, val));
+        try {
+			if(item.next()) {
+				name = item.getString("name");
+			    player = item.getString("player");
+			    money = item.getDouble("money");
+			    mana = item.getInt("mana");
+			    hp = item.getInt("hp");
+			    attack = item.getInt("attack");
+			    defense = item.getInt("defense");
+			    sight = item.getInt("sight");
+			    level = item.getInt("level");
+			    speed = item.getInt("speed");
+			    xp = item.getInt("xp");
+			    maxCarryWeight = item.getInt("maxCarryWeight");
+			    charID  = item.getString("charID");
+			    
+				loadItems();
+				loadLocations();
+				loadQuests();
+				loadSkills();
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
     	return false;
     }
     

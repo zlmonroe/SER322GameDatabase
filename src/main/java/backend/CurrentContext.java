@@ -11,8 +11,12 @@ public class CurrentContext {
 		//You not allowed to make an instance of this class!
 	}
 	
-	public static void loginPlayer(String us, String pw) {
+	public static void loginPlayer(String us, String pw) throws SQLException {
 		player = new Player(us, pw);
+		if(!player.loadPlayer(us, pw)) {
+			player = null;
+		}
+		System.out.println(player.getUsername());
 	}
 	
 	public static Player getPlayer() {

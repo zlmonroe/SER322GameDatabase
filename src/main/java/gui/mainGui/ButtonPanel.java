@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -84,6 +85,12 @@ public class ButtonPanel extends JPanel {
 		profileB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					mainPanel.refresh();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				mainPanel.switchPanel("PROFILE");
 			}
 		});
@@ -91,6 +98,12 @@ public class ButtonPanel extends JPanel {
 		charactersB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					mainPanel.refresh();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				mainPanel.switchPanel("CHARACTERS");
 			}
 		});

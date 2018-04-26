@@ -31,11 +31,10 @@ public class ProfilePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ProfilePanel(Player p) throws IOException {
+	public ProfilePanel() throws IOException {
 		this.setBackground(new Color(28,152,93));
-		JLabel myAccount = new JLabel("My Account") ;
 		
-		Player player = p;
+		Player player = CurrentContext.getPlayer();
 		
 		JLabel userNameL= new JLabel("Username:");
 		JLabel startDateL = new JLabel("Start Date:");
