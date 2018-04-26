@@ -5,6 +5,7 @@ import gui.general.ImagePanel;
 import gui.general.PromptTextField;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -13,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 //Home landing page of application.
-public class HomePanel extends JPanel {
+public class HomePanel extends ImagePanel {
     /**
      * 
      */
@@ -21,7 +22,6 @@ public class HomePanel extends JPanel {
     PromptTextField username;
     PromptTextField password;
     JButton login;
-    BufferedImage image;
 
     public HomePanel() {
         username = new PromptTextField("Username");

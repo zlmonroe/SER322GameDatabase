@@ -6,15 +6,12 @@ import backend.Item;
 import backend.Player;
 import backend.PlayerCharacter;
 import backend.Skill;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -241,7 +238,7 @@ public class MyCharactersPanel extends JPanel {
         GridBagConstraints con = new GridBagConstraints();
 
         JLabel skillL = new JLabel("Skills:");
-        List<Skill> skills = new ArrayList<Skill>();
+        List<Skill> skills = character.getSkills();
         skillL.setFont(new Font(skillL.getFont().getName(), Font.BOLD, 20));
 
         con.anchor = GridBagConstraints.WEST;

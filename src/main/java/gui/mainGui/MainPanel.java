@@ -34,7 +34,7 @@ public class MainPanel extends JPanel {
         home = new HomePanel();
         profile = new ProfilePanel();
         characters = new MyCharactersPanel();
-        community = new JPanel();
+        community = new CommunityPanel();
         wiki = new JPanel();
 
         this.add(home, "HOME");
