@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import backend.CharacterQuest;
 import backend.CurrentContext;
 import backend.Item;
 import backend.Player;
@@ -427,8 +428,8 @@ public class MyCharactersPanel extends JPanel {
 	        charPanel.setLayout(new GridBagLayout());
 	        GridBagConstraints con = new GridBagConstraints();
 
-	        JLabel questL = new JLabel("Skills:");
-	        List<Skill> quests = new ArrayList<Skill>();
+	        JLabel questL = new JLabel("Quests:");
+	        List<CharacterQuest> quests = new ArrayList<CharacterQuest>();
 	        questL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 20));
 
 	        con.anchor = GridBagConstraints.WEST;
@@ -437,7 +438,7 @@ public class MyCharactersPanel extends JPanel {
 	        con.gridy = 0;
 	        charPanel.add(questL, con);
 
-	        for (Skill quest : quests) {
+	        for (CharacterQuest quest : quests) {
 	            JPanel questPanel = new JPanel();
 	            questPanel.setLayout(new GridBagLayout());
 	            GridBagConstraints conS = new GridBagConstraints();
