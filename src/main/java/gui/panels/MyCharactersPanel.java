@@ -433,7 +433,8 @@ public class MyCharactersPanel extends JPanel {
 
             if (character != null) {
                 nameT = new JLabel(quest.getQuest());
-                statusT = new JLabel(String.valueOf(quest.getStatus()));
+                int comp = quest.getStatus();
+                statusT = new JLabel(comp<100?String.valueOf(comp)+"%":"Complete");
             } else {
                 nameT = new JLabel("NA");
                 statusT = new JLabel("NA");
