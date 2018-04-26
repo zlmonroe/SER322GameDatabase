@@ -11,9 +11,9 @@ public class GeneralQuery implements SQLAction  {
 
     public GeneralQuery(String table, String[] attributes, String[] values, String opperand) {
         query.append(table.toUpperCase());
-        if (attributes.length == 0)
+        if (attributes!=null && attributes.length == 0)
             attributes = null;
-        if (values.length == 0)
+        if (values !=null && values.length == 0)
             values = null;
         if(attributes!=null && values!=null){
             try {

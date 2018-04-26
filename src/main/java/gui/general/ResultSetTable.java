@@ -11,6 +11,12 @@ import javax.swing.table.DefaultTableModel;
  * Created by zlmonroe on 4/26/2018.
  */
 public class ResultSetTable extends JTable {
+
+    public ResultSetTable(){
+
+    }
+
+
     public ResultSetTable(ResultSet resultSet) throws SQLException {
         this.setModel(buildTableModel(resultSet));
     }

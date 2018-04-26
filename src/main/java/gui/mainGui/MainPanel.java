@@ -35,7 +35,7 @@ public class MainPanel extends JPanel {
         profile = new ProfilePanel();
         characters = new MyCharactersPanel();
         community = new CommunityPanel();
-        wiki = new JPanel();
+        wiki = new GameWikiPanel();
 
         this.add(home, "HOME");
         this.add(profile, "PROFILE");
