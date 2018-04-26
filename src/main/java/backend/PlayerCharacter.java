@@ -1,11 +1,12 @@
 package backend;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
 import backend.sql.GameServer;
 import backend.sql.SQLActions.GeneralQuery;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PlayerCharacter {
     private String name;
@@ -153,7 +154,23 @@ public class PlayerCharacter {
      * calculates the current weight of all items
      */
     private void calculateCurrentWeight() {
-    	//TODO
+    	String[] name = new String[this.items.size()];
+        String[] value = new String[this.items.size()];
+
+        for(int i = 0; i < this.items.size(); i++) {
+            name[i] = "name";
+            value[i] = this.items.get(i);
+        }
+
+    	ResultSet rs = gs.querry(new GeneralQuery("ITEM", name, value, "OR"));
+        this.currentCarry = 0;
+        try {
+            while(rs.next()) {
+                this.currentCarry += rs.getInt("weight");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
     /**
@@ -163,9 +180,21 @@ public class PlayerCharacter {
     private boolean loadItems() {
     	//TODO
     	//Load items, then calc the weight
-    	
-    	calculateCurrentWeight();
-    	return false;
+        this.items = new ArrayList<>();
+
+    	ResultSet itemsSet =
+                gs.querry(new GeneralQuery("HASITEM", "character", this.charID));
+
+        try {
+            while (itemsSet.next()) {
+                this.items.add(itemsSet.getString("item"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        calculateCurrentWeight();
+        System.out.println(Arrays.toString(this.items.toArray()));
+        return false;
     }
     
     /**
