@@ -371,17 +371,18 @@ public class MyCharactersPanel extends JPanel {
             weightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 
             conS.anchor = GridBagConstraints.WEST;
+            conS.anchor = GridBagConstraints.WEST;
             conS.gridx = 0;
-            conS.gridy = 1;
+            conS.gridy = 0;
             itemPanel.add(nameL, conS);
             conS.gridx = 1;
-            conS.gridy = 1;
+            conS.gridy = 0;
             itemPanel.add(nameT, conS);
-            conS.gridx = 1;
-            conS.gridy = 1;
-            itemPanel.add(weightIL, conS);
             conS.gridx = 2;
-            conS.gridy = 1;
+            conS.gridy = 0;
+            itemPanel.add(weightIL, conS);
+            conS.gridx = 3;
+            conS.gridy = 0;
             itemPanel.add(weightIT, conS);
 
             con.gridx = 0;
