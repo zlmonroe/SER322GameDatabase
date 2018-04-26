@@ -62,6 +62,8 @@ public class MyCharactersPanel extends JPanel {
         charPanel.add(createStatsPanel(character), con);
         con.gridy = 3;
         charPanel.add(createInventoryPanel(character), con);
+        con.gridy = 4;
+        charPanel.add(createQuestsPanel(character), con);
 
         return charPanel;
     }
@@ -317,11 +319,8 @@ public class MyCharactersPanel extends JPanel {
         goldL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
         weightL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
         maxWeightL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
-        goldT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         goldT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
-        weightT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         weightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
-        maxWeightT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         maxWeightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
         itemL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 
@@ -370,21 +369,25 @@ public class MyCharactersPanel extends JPanel {
                 nameT = new JLabel("NA");
                 weightIT = new JLabel("NA");
             }
-
+            
+            nameL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+            weightIL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
             nameT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
-            weightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+            weightIT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 
             conS.anchor = GridBagConstraints.WEST;
-            conS.anchor = GridBagConstraints.WEST;
+            conS.insets = new Insets(0, 0, 10, 10);
             conS.gridx = 0;
             conS.gridy = 0;
             itemPanel.add(nameL, conS);
             conS.gridx = 1;
             conS.gridy = 0;
             itemPanel.add(nameT, conS);
+            conS.insets = new Insets(0, 30, 10, 0);
             conS.gridx = 2;
             conS.gridy = 0;
             itemPanel.add(weightIL, conS);
+            conS.insets = new Insets(0, 0, 10, 10);
             conS.gridx = 3;
             conS.gridy = 0;
             itemPanel.add(weightIT, conS);
@@ -402,7 +405,7 @@ public class MyCharactersPanel extends JPanel {
         GridBagConstraints con = new GridBagConstraints();
 
         JLabel questL = new JLabel("Quests:");
-        List<CharacterQuest> quests = new ArrayList<CharacterQuest>();
+        List<CharacterQuest> quests = character.getQuests();
         questL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 20));
 
         con.anchor = GridBagConstraints.WEST;
@@ -410,7 +413,7 @@ public class MyCharactersPanel extends JPanel {
         con.gridx = 0;
         con.gridy = 0;
         charPanel.add(questL, con);
-
+        System.out.println(quests);
         for (CharacterQuest quest : quests) {
             JPanel questPanel = new JPanel();
             questPanel.setLayout(new GridBagLayout());
@@ -437,9 +440,11 @@ public class MyCharactersPanel extends JPanel {
             conS.gridx = 1;
             conS.gridy = 1;
             questPanel.add(nameT, con);
+            con.insets = new Insets(0, 0, 10, 30);
             conS.gridx = 2;
             conS.gridy = 1;
             questPanel.add(statusL, con);
+            con.insets = new Insets(0, 10, 10, 0);
             conS.gridx = 3;
             conS.gridy = 1;
             questPanel.add(statusT, con);

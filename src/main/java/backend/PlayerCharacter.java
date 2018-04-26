@@ -117,12 +117,12 @@ public class PlayerCharacter {
      */
     private boolean loadCharacter(String n) {
         //TODO
+        name = n;
         String atr =  "name";
         String val =  n;
         ResultSet item = gs.querry(new GeneralQuery("PlayerChar",atr, val));
         try {
             if(item.next()) {
-                name = item.getString("name");
                 player = item.getString("player");
                 money = item.getDouble("money");
                 mana = item.getInt("mana");
@@ -190,11 +190,13 @@ public class PlayerCharacter {
      */
     private boolean loadQuests() {
         String atr =  "playerCharacter";
-        String val =  charID;
-        ResultSet quest = gs.querry(new GeneralQuery("CharacterQuest",atr, val));
+        String val =  name;
+        ResultSet quest = gs.querry(new GeneralQuery("CharacterQuest", atr, val));
+        quests = new ArrayList<CharacterQuest>();
         try {
+            System.out.println("yo");
             while(quest.next()) {
-                quests.add(new CharacterQuest(quest.getInt("quest"), quest.getString("quest")));
+                quests.add(new CharacterQuest(quest.getInt("status"), quest.getString("quest")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
