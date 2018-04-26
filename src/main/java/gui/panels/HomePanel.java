@@ -29,7 +29,7 @@ public class HomePanel extends JPanel {
 	PromptTextField password;
 	JButton login;
 	BufferedImage image;
-	
+
 	public HomePanel() {
         this.setBackground(new Color(28,152,93));
 		username = new PromptTextField("Username");

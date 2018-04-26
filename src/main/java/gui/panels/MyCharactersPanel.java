@@ -90,6 +90,9 @@ public class MyCharactersPanel extends JPanel {
 		levT.setFont(new Font(charL.getFont().getName(), Font.BOLD, 20));
 		xpT.setFont(new Font(charL.getFont().getName(), Font.BOLD, 20));
 
+		charT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		levT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		xpT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		charT.setEditable(false);
 		levT.setEditable(false);
 		xpT.setEditable(false);
@@ -165,12 +168,17 @@ public class MyCharactersPanel extends JPanel {
 		manaL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		defenseL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 		speedL.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
-
+		hpT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		hpT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
+		attackT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		attackT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
+		sightT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		sightT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
+		manaT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		manaT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
+		defenseT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		defenseT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
+		speedT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		speedT.setFont(new Font(statsL.getFont().getName(), Font.BOLD, 16));
 
 		hpT.setEditable(false);
@@ -316,8 +324,11 @@ public class MyCharactersPanel extends JPanel {
 		goldL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 		weightL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 		maxWeightL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+		goldT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		goldT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+		weightT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		weightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
+		maxWeightT.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		maxWeightT.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 		itemL.setFont(new Font(inventoryL.getFont().getName(), Font.BOLD, 16));
 
