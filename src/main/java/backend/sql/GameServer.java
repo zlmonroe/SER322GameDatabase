@@ -1,10 +1,12 @@
 package backend.sql;
 
-import backend.sql.SQLActions.*;
-
-import java.io.BufferedReader;
+import backend.sql.SQLActions.CreateDatabase;
+import backend.sql.SQLActions.DropContents;
+import backend.sql.SQLActions.GeneralQuery;
+import backend.sql.SQLActions.ListTables;
+import backend.sql.SQLActions.LoadDatabase;
+import backend.sql.SQLActions.SQLAction;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -34,7 +36,7 @@ public class GameServer {
     public GameServer(String database, String schema, String hostname,
                       Integer port, String user, String password) throws SQLException {
 
-//        this.schema = schema;
+        this.schema = schema;
         this.database = database;
 
         //If connection to Postgres fails or the table is incomplete, recreate it.
@@ -55,7 +57,7 @@ public class GameServer {
             this.execute(new SQLAction() {
                 @Override
                 public String getAction() {
-                    return "SET SEARCH_PATH ="+schema+";";
+                    return "SET SEARCH_PATH = "+schema+";";
                 }
 
                 @Override
