@@ -14,9 +14,10 @@ public class Item {
 	GameServer gs;
 
     public Item(String n) {
+		gs = CurrentContext.getGameServer();
         name = n;
         loadItem(n);
-        gs = CurrentContext.getGameServer();
+
     }
 
     public String getName() {
