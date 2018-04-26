@@ -306,7 +306,7 @@ public class MyCharactersPanel extends JPanel {
         JLabel maxWeightL = new JLabel("MaxWeight:");
         JLabel maxWeightT;
 
-        JLabel itemL = new JLabel("Items:");
+        JLabel itemL = new JLabel("<HTML><U>Items</U></HTML>");
 
         if (character != null) {
             goldT = new JLabel(String.valueOf(character.getMoney()));
@@ -331,7 +331,9 @@ public class MyCharactersPanel extends JPanel {
         con.insets = new Insets(0, 10, 10, 0);
         con.gridx = 0;
         con.gridy = 0;
+        con.gridwidth = 2;
         charPanel.add(inventoryL, con);
+        con.gridwidth = 1;
         con.gridx = 0;
         con.gridy = 1;
         charPanel.add(goldL, con);
@@ -352,7 +354,10 @@ public class MyCharactersPanel extends JPanel {
         charPanel.add(maxWeightT, con);
         con.gridx = 0;
         con.gridy = 2;
+        con.gridwidth = 6;
+        con.anchor = GridBagConstraints.CENTER;
         charPanel.add(itemL, con);
+        con.anchor = GridBagConstraints.WEST;
 
         List<Item> items = character.getItems();
         for (Item item : items) {
