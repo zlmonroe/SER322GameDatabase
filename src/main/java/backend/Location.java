@@ -26,7 +26,7 @@ public class Location {
     public String getTerrain() {
         return terrain;
     }
-    
+    //sql
     private void loadLocation(String n) {
         //TODO
     }
