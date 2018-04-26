@@ -2,6 +2,8 @@ package backend;
 
 import backend.sql.GameServer;
 import backend.sql.SQLActions.GeneralQuery;
+import backend.sql.SQLActions.PlayerSkills;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -217,7 +219,21 @@ public class PlayerCharacter {
      * @return false if unsuccessfull
      */
     private boolean loadSkills() {
-        //TODO
-        return false;
+        skills = new ArrayList<>();
+        ResultSet s = gs.querry(new PlayerSkills(name));
+        boolean foundSkills = false;
+        try {
+            while (s.next()){
+                skills.add(
+                        new Skill(
+                                s.
+                                        getString("skill")));
+                foundSkills = true;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return foundSkills;
     }
 }
