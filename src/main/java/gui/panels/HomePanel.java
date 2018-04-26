@@ -20,7 +20,7 @@ public class HomePanel extends ImagePanel {
 	PromptTextField password;
 	JButton login;
 	BufferedImage image;
-	
+
 	public HomePanel() {
 		username = new PromptTextField("Username");
 		password = new PromptTextField("Password");
