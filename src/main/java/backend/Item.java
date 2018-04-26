@@ -58,7 +58,7 @@ public class Item {
     	boolean foundEffect = false;
     	try {
 			while (e.next()){
-				effect .add(e.getString("effect"));
+				effect.add(e.getString("effect"));
 				if (!foundEffect)
 					foundEffect = true;
 			}
