@@ -34,7 +34,6 @@ public class Item {
 	}
 
 	private boolean loadItem(String n) {
-    	//TODO
 		GameServer gs = CurrentContext.getGameServer();
         ResultSet item = gs.querry(new GeneralQuery("PlayerChar","name", n));
         try {
@@ -46,7 +45,6 @@ public class Item {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	return false;
