@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -45,7 +46,7 @@ public class ProfilePanel extends JPanel {
 		
 		if(player != null) {
 			userNameF = new JTextField(player.getUsername());
-			startDateF= new JTextField(player.getStartDate().toString());
+			startDateF= new JTextField(player.getStartDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 			balanceF = new JTextField(String.valueOf(player.getBalance()));
 		}
 		else {
