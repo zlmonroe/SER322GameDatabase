@@ -54,9 +54,14 @@ public class ProfilePanel extends JPanel {
 			startDateF= new JTextField("NA",7);
 			balanceF = new JTextField("NA",7);
 		}
+		
 		userNameF.setEditable(false);
 		startDateF.setEditable(false);
 		balanceF.setEditable(false);
+		
+		userNameF.setColumns(8);
+		startDateF.setColumns(8);
+		balanceF.setColumns(8);
 		
 		JPanel accountInfo = new JPanel();
 
