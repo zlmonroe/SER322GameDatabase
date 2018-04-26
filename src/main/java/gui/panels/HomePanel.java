@@ -1,6 +1,7 @@
 package gui.panels;
 
 import backend.CurrentContext;
+import gui.general.ImagePanel;
 import gui.general.PromptTextField;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,9 +10,10 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.sql.SQLException;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 //Home landing page of application.
-public class HomePanel extends ImagePanel {
+public class HomePanel extends JPanel {
 	/**
 	 * 
 	 */

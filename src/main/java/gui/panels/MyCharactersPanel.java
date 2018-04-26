@@ -22,7 +22,7 @@ import backend.PlayerCharacter;
 import backend.Skill;
 
 //The characters of player who is logged int
-public class MyCharactersPanel extends ImagePanel {
+public class MyCharactersPanel extends JPanel {
 	private Player currentPlayer;
 	
 
@@ -444,22 +444,22 @@ public class MyCharactersPanel extends ImagePanel {
 	            GridBagConstraints conS = new GridBagConstraints();
 	            JLabel nameL = new JLabel("Name:");
 	            JTextField nameT;
-	            JLabel efL = new JLabel("Effect:");
-	            JTextField efT;
+	            JLabel statusL = new JLabel("Effect:");
+	            JTextField statusT;
 
 	            if (character != null) {
-	                nameT = new JTextField(quest.getName());
-	                efT = new JTextField(quest.getEffect());
+	                nameT = new JTextField(quest.getQuest());
+	                statusT = new JTextField(quest.getStatus());
 	            } else {
 	                nameT = new JTextField("NA");
-	                efT = new JTextField("NA");
+	                statusT = new JTextField("NA");
 	            }
 
 	            nameT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
-	            efT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+	            statusT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
 
 	            nameT.setEditable(false);
-	            efT.setEditable(false);
+	            statusT.setEditable(false);
 
 	            conS.anchor = GridBagConstraints.WEST;
 	            conS.gridx = 0;
@@ -470,10 +470,10 @@ public class MyCharactersPanel extends ImagePanel {
 	            questPanel.add(nameT, con);
 	            conS.gridx = 2;
 	            conS.gridy = 1;
-	            questPanel.add(efL, con);
+	            questPanel.add(statusL, con);
 	            conS.gridx = 3;
 	            conS.gridy = 1;
-	            questPanel.add(efT, con);
+	            questPanel.add(statusT, con);
 
 	            con.gridx = 0;
 	            con.gridy++;
