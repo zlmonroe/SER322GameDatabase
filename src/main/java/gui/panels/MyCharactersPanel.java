@@ -61,6 +61,8 @@ public class MyCharactersPanel extends JPanel {
         charPanel.add(createInventoryPanel(character), con);
         con.gridy = 4;
         charPanel.add(createQuestsPanel(character), con);
+        con.gridy = 5;
+        //charPanel.add(createLocationsPanel(character), con);
 
         return charPanel;
     }
@@ -417,6 +419,67 @@ public class MyCharactersPanel extends JPanel {
             GridBagConstraints conS = new GridBagConstraints();
             JLabel nameL = new JLabel("Name:");
             JLabel nameT;
+            JLabel statusL = new JLabel("Status:");
+            JLabel statusT;
+
+            if (character != null) {
+                nameT = new JLabel(quest.getQuest());
+                statusT = new JLabel(String.valueOf(quest.getStatus()));
+            } else {
+                nameT = new JLabel("NA");
+                statusT = new JLabel("NA");
+            }
+
+            nameT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+            statusT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+            nameL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+            statusL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+            
+            conS.anchor = GridBagConstraints.WEST;
+            conS.insets = new Insets(0, 0, 0, 10);
+            conS.gridx = 0;
+            conS.gridy = 1;
+            questPanel.add(nameL, conS);
+            conS.gridx = 1;
+            conS.gridy = 1;
+            questPanel.add(nameT, conS);
+            conS.insets = new Insets(0, 30, 0, 0);
+            conS.gridx = 2;
+            conS.gridy = 1;
+            questPanel.add(statusL, conS);
+            conS.insets = new Insets(0, 0, 0, 10);
+            conS.gridx = 3;
+            conS.gridy = 1;
+            questPanel.add(statusT, conS);
+
+            con.gridx = 0;
+            con.gridy++;
+            charPanel.add(questPanel, con);
+        }
+        return charPanel;
+    }
+    
+    private JPanel createLocationsPanel(PlayerCharacter character) {
+        JPanel charPanel = new JPanel();
+        charPanel.setLayout(new GridBagLayout());
+        GridBagConstraints con = new GridBagConstraints();
+
+        JLabel questL = new JLabel("Quests:");
+        List<CharacterQuest> quests = character.getQuests();
+        questL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 20));
+
+        con.anchor = GridBagConstraints.WEST;
+        con.insets = new Insets(0, 10, 10, 0);
+        con.gridx = 0;
+        con.gridy = 0;
+        charPanel.add(questL, con);
+        System.out.println(quests);
+        for (CharacterQuest quest : quests) {
+            JPanel questPanel = new JPanel();
+            questPanel.setLayout(new GridBagLayout());
+            GridBagConstraints conS = new GridBagConstraints();
+            JLabel nameL = new JLabel("Name:");
+            JLabel nameT;
             JLabel statusL = new JLabel("Effect:");
             JLabel statusT;
 
@@ -430,25 +493,28 @@ public class MyCharactersPanel extends JPanel {
 
             nameT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
             statusT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+            nameL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+            statusL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+            
             conS.anchor = GridBagConstraints.WEST;
             conS.gridx = 0;
             conS.gridy = 1;
-            questPanel.add(nameL, con);
+            questPanel.add(nameL, conS);
             conS.gridx = 1;
             conS.gridy = 1;
-            questPanel.add(nameT, con);
-            con.insets = new Insets(0, 0, 10, 30);
+            questPanel.add(nameT, conS);
+            conS.insets = new Insets(0, 0, 10, 30);
             conS.gridx = 2;
             conS.gridy = 1;
-            questPanel.add(statusL, con);
-            con.insets = new Insets(0, 10, 10, 0);
+            questPanel.add(statusL, conS);
+            conS.insets = new Insets(0, 0, 10, 10);
             conS.gridx = 3;
             conS.gridy = 1;
-            questPanel.add(statusT, con);
+            questPanel.add(statusT, conS);
 
             con.gridx = 0;
             con.gridy++;
-            charPanel.add(questPanel, conS);
+            charPanel.add(questPanel, con);
         }
         return charPanel;
     }

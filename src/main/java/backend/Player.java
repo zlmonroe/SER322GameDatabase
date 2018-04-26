@@ -1,11 +1,9 @@
 package backend;
 
 import backend.sql.GameServer;
-import backend.sql.SQLActions.GeneralQuery;
-import backend.sql.SQLActions.Insert;
-import backend.sql.SQLActions.ListFriends;
-import backend.sql.SQLActions.ListPlayerChars;
-import backend.sql.SQLActions.SQLAction;
+import backend.sql.SQLActions.*;
+
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -29,11 +27,8 @@ public class Player {
 
 	/**
 	 * Create a player object from an existing player in the database
-	 * @param us user name of the player to get
-	 * @param pw password of player to get
-	 * @throws SQLException 
 	 */
-	public Player(String us, String pw){
+	public Player(){
 		gs = CurrentContext.getGameServer();
 	}
 	
@@ -123,18 +118,22 @@ public class Player {
         gs.execute(insert);
         loadFriends();
 	}
+
 	/**
 	 * saves this player into the database
+	 * @param attr target attribute to change.
+	 * @param newVal value replacing attr's current value
 	 */
-	public void savePlayer() {
-		//TODO
+	public void editPlayer(String attr, String newVal) {
+		Update update = new Update("PLAYERS", username, attr, newVal);
+		gs.execute(update);
 	}
 
 	/**
 	 * loads an existing player from the database
 	 * @param us player username
 	 * @param pw player password
-	 * @throws SQLException 
+	 * @throws SQLException - if there is a failure to connect to the database
 	 */
 	public boolean loadPlayer(String us, String pw) throws SQLException {
 		//code to load the player info from sql

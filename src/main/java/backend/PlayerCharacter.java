@@ -180,7 +180,7 @@ public class PlayerCharacter {
             e.printStackTrace();
         }
         calculateCurrentWeight();
-        System.out.println(Arrays.toString(this.items.toArray()));
+        System.out.println("items"+Arrays.toString(this.items.toArray()));
         return false;
     }
 
@@ -192,7 +192,6 @@ public class PlayerCharacter {
         ResultSet quest = gs.querry(new GeneralQuery("CharacterQuest", "playercharacter", name));
         quests = new ArrayList<CharacterQuest>();
         try {
-            System.out.println("yo");
             while(quest.next()) {
                 System.out.println("Quest Found");
                 quests.add(new CharacterQuest(quest.getInt("status"), quest.getString("quest")));
