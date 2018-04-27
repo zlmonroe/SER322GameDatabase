@@ -3,9 +3,12 @@ package backend.sql;
 import backend.sql.SQLActions.CreateDatabase;
 import backend.sql.SQLActions.DropContents;
 import backend.sql.SQLActions.GeneralQuery;
+import backend.sql.SQLActions.JoinSearchQuery;
 import backend.sql.SQLActions.ListTables;
 import backend.sql.SQLActions.LoadDatabase;
 import backend.sql.SQLActions.SQLAction;
+import gui.general.ResultSetTable;
+import java.awt.datatransfer.SystemFlavorMap;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedHashMap;
 
 /**
  * Created by zlmonroe on 4/21/2018.
@@ -172,6 +176,8 @@ public class GameServer {
         try {
             Statement statement = connection.createStatement();
             rs = statement.executeQuery(sql.getAction());
+            System.out.println(sql.getAction());
+            System.out.println(sql.getFunction());
         }
         catch (SQLException sqlE) {
             sqlE.printStackTrace();
@@ -225,6 +231,27 @@ public class GameServer {
         //iterate through result and get the names
         while(friends.next()) {
             System.out.println(friends.getString(2));
+        }
+
+        String[] tables = new String[]{"PLAYERS", "FRIENDSWITH", "PLAYERCHAR",
+                "HASITEM"};
+
+        LinkedHashMap<String, String> joinConditions = new LinkedHashMap<>();
+        joinConditions.put("PLAYERS.username","FRIENDSWITH.username");
+        joinConditions.put("FRIENDSWITH.friendname","PLAYERCHAR.player");
+        joinConditions.put("PLAYERCHAR.charid", "HASITEM.character");
+
+        LinkedHashMap<String, String> attrConditions = new LinkedHashMap<>();
+        attrConditions.put("PLAYERS.username", "zmonroe");
+
+        String[] searches = new String[]{"friendname", "item"};
+
+        SQLAction jsq = new JoinSearchQuery(tables, joinConditions, attrConditions, searches,
+                "friendname");
+        ResultSet joinRs = gs.querry(jsq);
+        while(joinRs.next()) {
+            System.out.println(joinRs.getString("friendname")+"\t|\t"+joinRs.getString
+                    ("item"));
         }
     }
 }
