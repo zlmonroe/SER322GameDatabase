@@ -21,6 +21,16 @@ public class Skill {
     	name = n;
     	loadSkill();
     }
+    
+    public Skill(String name, int level, int coolDown, int manaCost, String effect) {
+        super();
+        this.name = name;
+        this.level = level;
+        this.coolDown = coolDown;
+        this.manaCost = manaCost;
+        this.effect = effect;
+    }
+
     /**
      * Load skill from database
      */

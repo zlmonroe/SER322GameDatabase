@@ -2,6 +2,7 @@ package backend;
 
 import backend.sql.GameServer;
 import backend.sql.SQLActions.GeneralQuery;
+import backend.sql.SQLActions.PlayCharLocations;
 import backend.sql.SQLActions.PlayerSkills;
 
 import java.sql.ResultSet;
@@ -29,7 +30,7 @@ public class PlayerCharacter {
 
     private List<Item> items;
     private List<CharacterQuest> quests;
-    private List<String> locations;
+    private List<Location> locations;
     private List<Skill> skills;
 
     private GameServer gs;
@@ -104,7 +105,7 @@ public class PlayerCharacter {
         return quests;
     }
 
-    public List<String> getLocations() {
+    public List<Location> getLocations() {
         return locations;
     }
 
@@ -210,8 +211,24 @@ public class PlayerCharacter {
      * @return false if unsuccessfull
      */
     private boolean loadLocations() {
-        //TODO
-        return false;
+        locations = new ArrayList<>();
+        ResultSet l = gs.querry(new PlayCharLocations(name));
+        boolean foundSkills = false;
+        try {
+            while (l.next()){
+                    System.out.println("hey");
+                    Location location = new Location(
+                            l.getString("name"), l.getInt("baseAggro"), 
+                            l.getBoolean("canTP"), l.getInt("avgLevel"), 
+                            l.getString("terrain"));
+                    locations.add(location);
+                foundSkills = true;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return foundSkills;
     }
 
     /**
@@ -224,10 +241,12 @@ public class PlayerCharacter {
         boolean foundSkills = false;
         try {
             while (s.next()){
-                skills.add(
-                        new Skill(
-                                s.
-                                        getString("skill")));
+                    System.out.println("hey");
+                    Skill skill = new Skill(
+                            s.getString("name"), s.getInt("level"), 
+                            s.getInt("coolDown"), s.getInt("manaCost"), 
+                            s.getString("effect"));
+                    skills.add(skill);
                 foundSkills = true;
             }
         } catch (SQLException e){

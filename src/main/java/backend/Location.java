@@ -11,6 +11,15 @@ public class Location {
         this.name = name;
     }
     
+    public Location(String name, int baseAggro, boolean canTP, int avgLevel, String terrain) {
+        super();
+        this.name = name;
+        this.baseAggro = baseAggro;
+        this.canTP = canTP;
+        this.avgLevel = avgLevel;
+        this.terrain = terrain;
+    }
+
     public String getName() {
         return name;
     }

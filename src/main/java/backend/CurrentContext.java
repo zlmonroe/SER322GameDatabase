@@ -19,7 +19,9 @@ public class CurrentContext {
 			player = null;
 			JOptionPane.showMessageDialog(null,"The username and/or password you entered was invalid. Please try again.", "Invalid Credentials",JOptionPane.ERROR_MESSAGE);
 		}
-		System.out.println(player.getUsername());
+		else {
+		    System.out.println(player.getUsername());
+		}
 	}
 	
 	public static Player getPlayer() {

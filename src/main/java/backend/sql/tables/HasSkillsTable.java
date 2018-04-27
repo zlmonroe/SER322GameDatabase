@@ -24,6 +24,8 @@ public class HasSkillsTable extends Table {
                         "89626, 'Sneak'",
                         "654168, 'Sprint'",
                         "93527, 'Infect'",
+                        "654159, 'Infect'",
+                        "654159, 'Sprint'",
                         "23673, 'Preach'",
                         "535416, 'Endulge'"});
     }
