@@ -43,7 +43,7 @@ public class JoinSearchQuery implements SQLAction {
         for(String key : values.keySet()) {
             operator = i!=values.size()-1 ? operator:"";
             System.out.println(i+" "+(values.size()-1));
-            sql.append(key).append(" LIKE '%").append(values.get(key)).append("%'").append
+            sql.append(key).append(" ILIKE '%").append(values.get(key)).append("%'").append
                     (operator);
             i++;
         }

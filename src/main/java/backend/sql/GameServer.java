@@ -7,8 +7,6 @@ import backend.sql.SQLActions.JoinSearchQuery;
 import backend.sql.SQLActions.ListTables;
 import backend.sql.SQLActions.LoadDatabase;
 import backend.sql.SQLActions.SQLAction;
-import gui.general.ResultSetTable;
-import java.awt.datatransfer.SystemFlavorMap;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -31,6 +31,9 @@ public class HomePanel extends ImagePanel {
         actualPassword = "";
         holder = new ArrayList<>();
 
+        username.setTransparent(true);
+        password.setTransparent(true);
+
         username.setColumns(10);
         password.setColumns(10);
         login = new JButton("Login");
