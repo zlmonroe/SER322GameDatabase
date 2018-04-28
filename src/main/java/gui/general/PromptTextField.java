@@ -10,14 +10,11 @@ import java.util.Objects;
 import javax.swing.JTextField;
 
 public class PromptTextField extends JTextField {
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     private String prompt;
     private String initText;
     private boolean entered;
-
+    private boolean transparent;
 
     public PromptTextField(String p) {
         prompt = p;
@@ -26,6 +23,7 @@ public class PromptTextField extends JTextField {
         initFocus();
         setOpaque(false);
         this.setFont(new Font(this.getFont().getName(), Font.BOLD, 30));
+        transparent = false;
     }
 
     public PromptTextField(String p, String i) {
@@ -35,6 +33,11 @@ public class PromptTextField extends JTextField {
         this.setText(initText);
         initFocus();
         setOpaque(false);
+        transparent = false;
+    }
+
+    public void setTransparent(boolean transparent) {
+        this.transparent = transparent;
     }
 
     public boolean textEntered() {
@@ -69,7 +72,9 @@ public class PromptTextField extends JTextField {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setComposite(AlphaComposite.SrcOver.derive(0.65f));
+        if(transparent) {
+            g2d.setComposite(AlphaComposite.SrcOver.derive(0.65f));
+        }
         super.paint(g2d);
         g2d.dispose();
     }

@@ -33,6 +33,9 @@ public class HomePanel extends ImagePanel {
         username = new PromptTextField("Username");
         password = new PasswordTextField("Password");
 
+        username.setTransparent(true);
+        password.setTransparent(true);
+
         username.setColumns(10);
         password.setColumns(10);
         login = new JButton("Login");

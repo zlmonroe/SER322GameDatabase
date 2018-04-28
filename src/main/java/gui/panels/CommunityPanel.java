@@ -4,56 +4,72 @@ import backend.CurrentContext;
 import backend.Player;
 import backend.sql.GameServer;
 import backend.sql.SQLActions.JoinSearchQuery;
-import backend.sql.SQLActions.ListFriends;
 import backend.sql.SQLActions.SQLAction;
-import backend.sql.tables.Table;
+import gui.general.ImagePanel;
 import gui.general.PromptTextField;
 import gui.general.ResultSetTable;
-
-import java.awt.*;
+import gui.general.SearchField;
+import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Label;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Objects;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import gui.general.ImagePanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 //Community, for viewing friends' profiles and searching for other players
 public class CommunityPanel extends ImagePanel {
     private JScrollPane characterScroller;
     private PromptTextField name, item, quests, skills;
+    private JRadioButton friendButton;
 
     public CommunityPanel() {
         JPanel top = new JPanel();
-        top.setOpaque(false);
-        top.setPreferredSize(new Dimension(999999,50));
-        name = new PromptTextField("Friend");
-        item = new PromptTextField("Friend's items");
-        quests = new PromptTextField("Shared Quest");
-        skills = new PromptTextField("Friend's skill");
+        top.setMaximumSize(new Dimension(999999,10));
+        name = new PromptTextField("Player");
+        item = new PromptTextField("Item");
+        quests = new PromptTextField("Quests");
+        skills = new PromptTextField("Skill");
         JButton go = new JButton("Run Search");
         go.addActionListener(e -> updateSQL());
+        friendButton = new JRadioButton("Friends", true);
+        JRadioButton allButton = new JRadioButton("All", false);
+        ButtonGroup playerSearch = new ButtonGroup();
+        playerSearch.add(friendButton);
+        playerSearch.add(allButton);
+        JPanel radioPanel = new JPanel();
+        radioPanel.add(friendButton);
+        radioPanel.add(allButton);
+        radioPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+         "Search only in my:"));
+        top.add(radioPanel);
         top.add(name);
         top.add(item);
         top.add(quests);
         top.add(skills);
         top.add(go);
 
+        SearchField s = new SearchField("PLAYERS", "username");
+        top.add(s);
+
         Label l = new Label("You have to login before you can view your friends!");
         characterScroller = new JScrollPane(l, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         characterScroller.setBorder(new EmptyBorder(0, 0, 0, 0));
-        characterScroller.setPreferredSize(new Dimension(9999999,500));
+//        characterScroller.setPreferredSize(new Dimension(9999999,550));
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(top);
         this.add(characterScroller);
@@ -73,8 +89,13 @@ public class CommunityPanel extends ImagePanel {
                 "HASITEM", "CHARACTERQUEST", "HASSKILL"};
 
         LinkedHashMap<String, String> joinConditions = new LinkedHashMap<>();
-        joinConditions.put("PLAYERS.username","FRIENDSWITH.username");
-        joinConditions.put("FRIENDSWITH.friendname","PLAYERCHAR.player");
+        if(friendButton.isSelected()) {
+            joinConditions.put("PLAYERS.username", "FRIENDSWITH.username");
+            joinConditions.put("FRIENDSWITH.friendname", "PLAYERCHAR.player");
+        }
+        else {
+            joinConditions.put("PLAYERS.username", "PLAYERCHAR.player");
+        }
         joinConditions.put("HASITEM.character", "PLAYERCHAR.charid");
         joinConditions.put("PLAYERCHAR.name","CHARACTERQUEST.playercharacter");
         joinConditions.put("PLAYERCHAR.charid","HASSKILL.character");
