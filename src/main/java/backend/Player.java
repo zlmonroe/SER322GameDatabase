@@ -1,6 +1,7 @@
 package backend;
 
 import backend.sql.GameServer;
+import java.sql.Date;
 import backend.sql.SQLActions.*;
 
 import javax.swing.*;
@@ -38,11 +39,15 @@ public class Player {
 	 * @param pw password of new player
 	 * @param b starting balance of new player
 	 */
-	public Player(String us, String pw, double b) {
+	public Player(String us, String pw) {
 		username = us;
 		password = pw;
-		balance = b;
+		balance = 0;
 		startDate = LocalDate.now();
+		String d = Date.valueOf(startDate).toString();
+		String[] ar = {username, password, d, "0"}; 
+		Insert addPlayer = new Insert("Players", ar);
+		gs.execute(addPlayer);
 	}
 	
 	public String getUsername() {
