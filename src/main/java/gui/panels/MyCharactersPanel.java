@@ -32,9 +32,11 @@ public class MyCharactersPanel extends JPanel {
         con.anchor = GridBagConstraints.NORTHWEST;
         if (currentPlayer != null) {
             List<String> charNames = currentPlayer.getCharacters();
-            for (String name : charNames) {
-                p.add(createCharacterPanel(new PlayerCharacter(name)));
-            }
+            if(charNames!=null) {
+                for (String name : charNames) {
+                    p.add(createCharacterPanel(new PlayerCharacter(name)));
+                }
+        }
         }
 
 

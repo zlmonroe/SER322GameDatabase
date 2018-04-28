@@ -11,11 +11,13 @@ public class PasswordTextField extends PromptTextField{
     public PasswordTextField(String p) {
         super(p);
         holder = new ArrayList<Character>();
+        makeInvisible();
     }
     
     public PasswordTextField(String p, String i) {
         super(p, i);
         holder = new ArrayList<Character>();
+        makeInvisible();
     }
     
     @Override

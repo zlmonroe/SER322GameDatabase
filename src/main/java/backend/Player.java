@@ -40,12 +40,13 @@ public class Player {
 	 * @param b starting balance of new player
 	 */
 	public Player(String us, String pw) {
+        gs = CurrentContext.getGameServer();
 		username = us;
 		password = pw;
 		balance = 0;
 		startDate = LocalDate.now();
 		String d = Date.valueOf(startDate).toString();
-		String[] ar = {username, password, d, "0"}; 
+		String[] ar = {"'"+username+"', '" + password+"', '"+ d+"', '0'"}; 
 		Insert addPlayer = new Insert("Players", ar);
 		gs.execute(addPlayer);
 	}
