@@ -10,8 +10,9 @@ public class PlayCharLocations implements SQLAction{
 
     @Override
     public String getAction() {
-        return "SELECT L.name, L.baseAggro, L.canTP, L.avgLevel, L.terrain FROM hasskill AS H,"+
-                "locations AS L, discovered AS D WHERE D.location='"+ name +"'";
+        return "SELECT L.name, L.baseAggro, L.canTP, L.avgLevel, L.terrain FROM "+
+                "locations AS L, discovered AS D WHERE D.playerCharacter='"+name +
+                "' AND D.location = L.name";
     }
 
     @Override

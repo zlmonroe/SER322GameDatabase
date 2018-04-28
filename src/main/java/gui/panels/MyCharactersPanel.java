@@ -32,9 +32,11 @@ public class MyCharactersPanel extends JPanel {
         con.anchor = GridBagConstraints.NORTHWEST;
         if (currentPlayer != null) {
             List<String> charNames = currentPlayer.getCharacters();
-            for (String name : charNames) {
-                p.add(createCharacterPanel(new PlayerCharacter(name)));
-            }
+            if(charNames!=null) {
+                for (String name : charNames) {
+                    p.add(createCharacterPanel(new PlayerCharacter(name)));
+                }
+        }
         }
 
 
@@ -477,15 +479,15 @@ public class MyCharactersPanel extends JPanel {
         charPanel.setLayout(new GridBagLayout());
         GridBagConstraints con = new GridBagConstraints();
 
-        JLabel questL = new JLabel("Locations:");
+        JLabel locationL = new JLabel("Locations:");
         List<Location> locations = character.getLocations();
-        questL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 20));
+        locationL.setFont(new Font(locationL.getFont().getName(), Font.BOLD, 20));
 
         con.anchor = GridBagConstraints.WEST;
         con.insets = new Insets(0, 10, 10, 0);
         con.gridx = 0;
         con.gridy = 0;
-        charPanel.add(questL, con);
+        charPanel.add(locationL, con);
         System.out.println(locations);
         for (Location location : locations) {
             JPanel questPanel = new JPanel();
@@ -504,10 +506,10 @@ public class MyCharactersPanel extends JPanel {
                 statusT = new JLabel("NA");
             }
 
-            nameT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
-            statusT.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
-            nameL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
-            statusL.setFont(new Font(questL.getFont().getName(), Font.BOLD, 16));
+            nameT.setFont(new Font(locationL.getFont().getName(), Font.BOLD, 16));
+            statusT.setFont(new Font(locationL.getFont().getName(), Font.BOLD, 16));
+            nameL.setFont(new Font(locationL.getFont().getName(), Font.BOLD, 16));
+            statusL.setFont(new Font(locationL.getFont().getName(), Font.BOLD, 16));
             
             conS.anchor = GridBagConstraints.WEST;
             conS.gridx = 0;
@@ -516,7 +518,7 @@ public class MyCharactersPanel extends JPanel {
             conS.gridx = 1;
             conS.gridy = 1;
             questPanel.add(nameT, conS);
-            conS.insets = new Insets(0, 0, 0, 30);
+            conS.insets = new Insets(0, 30, 0, 0);
             conS.gridx = 2;
             conS.gridy = 1;
             questPanel.add(statusL, conS);

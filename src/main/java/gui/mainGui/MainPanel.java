@@ -18,7 +18,9 @@ public class MainPanel extends JPanel {
     private CardLayout layout;
 
     private JPanel home;
+    private JPanel signup;
     private JPanel profile;
+    private JPanel profileEdit;
     private JPanel characters;
     private JPanel community;
     private JPanel wiki;
@@ -31,14 +33,18 @@ public class MainPanel extends JPanel {
         layout = new CardLayout();
         this.setLayout(layout);
 
-        home = new HomePanel();
+        home = new HomePanel(this);
+        signup = new SignupPanel(this);
         profile = new ProfilePanel();
+        profileEdit = new ProfileEditPanel();
         characters = new MyCharactersPanel();
         community = new CommunityPanel();
         wiki = new GameWikiPanel();
 
         this.add(home, "HOME");
+        this.add(signup, "SIGNUP");
         this.add(profile, "PROFILE");
+        this.add(profileEdit, "EDIT");
         this.add(characters, "CHARACTERS");
         this.add(community, "COMMUNITY");
         this.add(wiki, "WIKI");
@@ -52,9 +58,7 @@ public class MainPanel extends JPanel {
      * @param panelName name of the panel to switch to 
      */
     public void switchPanel(String panelName) {
-        if(MainFrame.PANEL_NAMES.contains(panelName)){
             layout.show(this, panelName);
-        }
     }
 
     public void refresh() throws IOException {

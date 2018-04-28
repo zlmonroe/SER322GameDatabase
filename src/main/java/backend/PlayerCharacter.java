@@ -196,7 +196,6 @@ public class PlayerCharacter {
         quests = new ArrayList<CharacterQuest>();
         try {
             while(quest.next()) {
-                System.out.println("Quest Found");
                 quests.add(new CharacterQuest(quest.getInt("status"), quest.getString("quest")));
             }
         } catch (SQLException e) {
@@ -213,7 +212,7 @@ public class PlayerCharacter {
     private boolean loadLocations() {
         locations = new ArrayList<>();
         ResultSet l = gs.querry(new PlayCharLocations(name));
-        boolean foundSkills = false;
+        boolean found = false;
         try {
             while (l.next()){
                     System.out.println("hey");
@@ -222,13 +221,14 @@ public class PlayerCharacter {
                             l.getBoolean("canTP"), l.getInt("avgLevel"), 
                             l.getString("terrain"));
                     locations.add(location);
-                foundSkills = true;
+                found = true;
             }
         } catch (SQLException e){
             e.printStackTrace();
             e.getMessage();
         }
-        return foundSkills;
+        System.out.println("loc" + locations);
+        return found;
     }
 
     /**
@@ -241,7 +241,6 @@ public class PlayerCharacter {
         boolean foundSkills = false;
         try {
             while (s.next()){
-                    System.out.println("hey");
                     Skill skill = new Skill(
                             s.getString("name"), s.getInt("level"), 
                             s.getInt("coolDown"), s.getInt("manaCost"), 

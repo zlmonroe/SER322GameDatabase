@@ -13,15 +13,14 @@ public class CurrentContext {
 		//You not allowed to make an instance of this class!
 	}
 	
-	public static void loginPlayer(String us, String pw) throws SQLException {
+	public static boolean loginPlayer(String us, String pw) throws SQLException {
 		player = new Player();
 		if(!player.loadPlayer(us, pw)) {
 			player = null;
-			JOptionPane.showMessageDialog(null,"The username and/or password you entered was invalid. Please try again.", "Invalid Credentials",JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
-		else {
-		    System.out.println(player.getUsername());
-		}
+	    System.out.println(player.getUsername());
+	    return true;
 	}
 	
 	public static Player getPlayer() {
@@ -40,6 +39,10 @@ public class CurrentContext {
 
 	public static GameServer getGameServer() {
 	    return gameServer;
+    }
+
+    public static void signupPlayer(String us, String pw) {
+        player = new Player(us, pw);
     }
 	
 }
