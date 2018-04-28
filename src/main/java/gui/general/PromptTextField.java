@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Objects;
 import javax.swing.JTextField;
 
 public class PromptTextField extends JTextField {
@@ -59,6 +60,10 @@ public class PromptTextField extends JTextField {
                 }
             }
         });
+    }
+
+    public String getEnteredText() {
+        return textEntered() ? super.getText():"";
     }
 
     @Override

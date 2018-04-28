@@ -1,11 +1,7 @@
 package backend.sql.SQLActions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * Created by zlmonroe on 4/26/2018.
@@ -20,7 +16,8 @@ public class JoinSearchQuery implements SQLAction {
             throw new IllegalArgumentException("Joins must not be null!");
         }
         if(!(joinAll.length == on.size()+1)) {
-            throw new IllegalArgumentException("Joins must match conditions!");
+            throw new IllegalArgumentException("Joins must match conditions! ("+joinAll
+                    .length+"!="+(on.size()+1)+")");
         }
 
         ArrayList<String> keys = new ArrayList<>(on.keySet());
@@ -35,7 +32,7 @@ public class JoinSearchQuery implements SQLAction {
         sql.append(" FROM ").append(joinAll[0]);
 
         for(int i = 0; i < joinAll.length - 1; i++) {
-            sql.append("\nJOIN ").append(joinAll[i+1]).append(" ON ").append(keys.get(i))
+            sql.append("\nFULL OUTER JOIN ").append(joinAll[i+1]).append(" ON ").append(keys.get(i))
                     .append(" = ").append(on.get(keys.get(i)));
         }
 
@@ -46,7 +43,8 @@ public class JoinSearchQuery implements SQLAction {
         for(String key : values.keySet()) {
             operator = i!=values.size()-1 ? operator:"";
             System.out.println(i+" "+(values.size()-1));
-            sql.append(key).append(" = '").append(values.get(key)).append("'").append(operator);
+            sql.append(key).append(" LIKE '%").append(values.get(key)).append("%'").append
+                    (operator);
             i++;
         }
         sql.append("\nORDER BY ").append(orderBy).append(";");
