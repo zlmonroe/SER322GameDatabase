@@ -143,7 +143,7 @@ public class CommunityPanel extends ImagePanel {
         System.out.println("YOUR CONDITIONS:"+ Arrays.toString(joinConditions.keySet().toArray()));
 
         SQLAction jsq = new JoinSearchQuery(tables, joinConditions, attrConditions, searches,
-                "friendname");
+                "friendname",false);
         ResultSet joinRs = gs.querry(jsq);
         System.out.println("join:"+joinRs);
 

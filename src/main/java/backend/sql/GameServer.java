@@ -245,7 +245,7 @@ public class GameServer {
         String[] searches = new String[]{"friendname", "item"};
 
         SQLAction jsq = new JoinSearchQuery(tables, joinConditions, attrConditions, searches,
-                "friendname");
+                "friendname",false);
         ResultSet joinRs = gs.querry(jsq);
         while(joinRs.next()) {
             System.out.println(joinRs.getString("friendname")+"\t|\t"+joinRs.getString
