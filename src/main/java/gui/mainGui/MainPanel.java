@@ -56,16 +56,25 @@ public class MainPanel extends JPanel {
     /**
      * Switches the panel to display the proper panel.
      * @param panelName name of the panel to switch to 
+     * @throws IOException 
      */
-    public void switchPanel(String panelName) {
-            layout.show(this, panelName);
+    public void switchPanel(String panelName){
+        try {
+            refresh();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        layout.show(this, panelName);
     }
 
     public void refresh() throws IOException {
         profile = new ProfilePanel();
         characters = new MyCharactersPanel();
+        signup = new SignupPanel(this);
         this.add(profile, "PROFILE");
         this.add(characters, "CHARACTERS");
+        this.add(signup, "SIGNUP");
         ((CommunityPanel)this.community).updateSQL();
     }
 }

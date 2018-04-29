@@ -68,13 +68,15 @@ public class HomePanel extends ImagePanel {
                                 "The username and/or password you entered was invalid. Please try again.", 
                                 "Invalid Credentials",JOptionPane.ERROR_MESSAGE);
                     }
+                    else {
+                        main.switchPanel("PROFILE");
+                        //resetting login fields
+                        username.setText("Username");
+                        password.setText("Password");
+                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                //resetting login fields
-                username.setText("Username");
-                password.setText("Password");
-                main.switchPanel("PROFILE");
             }
         });
     }
