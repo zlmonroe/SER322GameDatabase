@@ -4,16 +4,14 @@ import backend.CurrentContext;
 import backend.Player;
 import backend.sql.GameServer;
 import backend.sql.SQLActions.JoinSearchQuery;
+import backend.sql.SQLActions.NoFailInsertFriends;
 import backend.sql.SQLActions.SQLAction;
 import gui.general.ImagePanel;
 import gui.general.PromptTextField;
 import gui.general.ResultSetTable;
 import gui.general.SearchField;
-import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Label;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +23,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -63,7 +62,21 @@ public class CommunityPanel extends ImagePanel {
         top.add(go);
 
         SearchField s = new SearchField("PLAYERS", "username");
+        JButton addFriend = new JButton("Add Friend");
+        addFriend.addActionListener(e -> {
+            if(CurrentContext.getPlayer() != null) {
+                GameServer gs = CurrentContext.getGameServer();
+                gs.execute(new NoFailInsertFriends(CurrentContext.getPlayer().getUsername(),
+                        (String) s.getEditor().getItem()));
+            }
+            else {
+                JOptionPane.showMessageDialog(null,"You have to log in first!",
+                        "Not yet logged in!",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
         top.add(s);
+        top.add(addFriend);
 
         Label l = new Label("You have to login before you can view your friends!");
         characterScroller = new JScrollPane(l, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
