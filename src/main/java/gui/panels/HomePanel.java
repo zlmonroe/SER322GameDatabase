@@ -2,7 +2,7 @@ package gui.panels;
 
 import backend.CurrentContext;
 import gui.general.ImagePanel;
-import gui.general.PasswordTextField;
+import gui.general.PasswordPromptField;
 import gui.general.PromptTextField;
 import gui.mainGui.MainPanel;
 
@@ -22,7 +22,7 @@ public class HomePanel extends ImagePanel {
      */
     private static final long serialVersionUID = 1L;
     PromptTextField username;
-    PasswordTextField password;
+    PasswordPromptField password;
     JButton login;
     JButton signup;
     BufferedImage image;
@@ -31,7 +31,7 @@ public class HomePanel extends ImagePanel {
     public HomePanel(MainPanel mp) {
         main = mp;
         username = new PromptTextField("Username");
-        password = new PasswordTextField("Password");
+        password = new PasswordPromptField("Password");
 
         username.setTransparent(true);
         password.setTransparent(true);
@@ -72,7 +72,7 @@ public class HomePanel extends ImagePanel {
                         main.switchPanel("PROFILE");
                         //resetting login fields
                         username.setText("Username");
-                        password.setText("Password");
+                        password.setPrompt("Password");
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();

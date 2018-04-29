@@ -15,7 +15,7 @@ import backend.CurrentContext;
 import backend.sql.GameServer;
 import backend.sql.SQLActions.GeneralQuery;
 import gui.general.ImagePanel;
-import gui.general.PasswordTextField;
+import gui.general.PasswordPromptField;
 import gui.general.PromptTextField;
 import gui.mainGui.MainPanel;
 
@@ -25,8 +25,8 @@ public class SignupPanel extends ImagePanel{
      */
     private static final long serialVersionUID = 1L;
     PromptTextField username;
-    PromptTextField password;
-    PromptTextField password2;
+    PasswordPromptField password;
+    PasswordPromptField password2;
     JButton cancel;
     JButton signup;
     private GameServer gs;
@@ -37,10 +37,10 @@ public class SignupPanel extends ImagePanel{
         username = new PromptTextField("Username");
         username.setTransparent(true);
         username.setColumns(10);
-        password = new PasswordTextField("Password");
+        password = new PasswordPromptField("Password");
         password.setTransparent(true);
         password.setColumns(10);
-        password2 = new PasswordTextField("Reenter Password");
+        password2 = new PasswordPromptField("Reenter Password");
         password2.setTransparent(true);
         password2.setColumns(10);
         cancel = new JButton("Cancel");
@@ -85,8 +85,8 @@ public class SignupPanel extends ImagePanel{
                 }
                 //resetting login fields
                 username.setText("Username");
-                password.setText("Password");
-                password2.setText("Reenter Password");
+                password.setPrompt("Password");
+                password2.setPrompt("Reenter Password");
             }
         });
         
