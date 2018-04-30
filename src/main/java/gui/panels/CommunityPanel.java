@@ -31,21 +31,22 @@ import javax.swing.border.EmptyBorder;
 
 //Community, for viewing friends' profiles and searching for other players
 public class CommunityPanel extends ImagePanel {
+    private JPanel top;
     private JScrollPane characterScroller;
     private PromptTextField name, item, quests, skills;
-    private JRadioButton friendButton;
-
+    private JRadioButton friendButton, allButton;
+    private JButton go;
     public CommunityPanel() {
-        JPanel top = new JPanel();
+        top = new JPanel();
         top.setMaximumSize(new Dimension(999999,10));
         name = new PromptTextField("Player");
         item = new PromptTextField("Item");
         quests = new PromptTextField("Quests");
         skills = new PromptTextField("Skill");
-        JButton go = new JButton("Run Search");
+        go = new JButton("Run Search");
         go.addActionListener(e -> updateSQL());
         friendButton = new JRadioButton("Friends", true);
-        JRadioButton allButton = new JRadioButton("All", false);
+        allButton = new JRadioButton("All", false);
         ButtonGroup playerSearch = new ButtonGroup();
         playerSearch.add(friendButton);
         playerSearch.add(allButton);

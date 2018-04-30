@@ -2,6 +2,7 @@ package gui.panels;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
 
 import backend.CurrentContext;
 import backend.sql.GameServer;
@@ -13,6 +14,9 @@ import gui.general.ResultSetTable;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,22 +25,33 @@ import java.util.LinkedList;
 //Game wiki page, to search for game info such as quests, item, etc
 public class GameWikiPanel extends ImagePanel {
     private JPanel choicesPanel;
-    private JComboBox choices;
+    private JComboBox choices, attrChoices;
     private JButton queryBasic;
+    private JLabel choiceLabel, attrLabel, searchLabel;
+    private JTextField search;
     private GameServer gs;
     private JScrollPane scroll;
     private LinkedHashMap<String, String[]> tables;
     private LinkedHashMap<String, String[]> attrs;
 
     public GameWikiPanel(){
+        gs = CurrentContext.getGameServer();
+
         choicesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,15,15));
         choicesPanel.setMaximumSize(new Dimension(3000, 50));
         choicesPanel.setMinimumSize(new Dimension(3000, 50));
         choicesPanel.setPreferredSize(new Dimension(3000, 50));
         choicesPanel.setBackground(Color.GREEN);
-        choices = new JComboBox();
+
         queryBasic = new JButton("View");
-        gs = CurrentContext.getGameServer();
+        choiceLabel = new JLabel("Content:");
+        choices = new JComboBox();
+
+        attrLabel = new JLabel("Filter by;");
+        attrChoices = new JComboBox();
+
+        searchLabel = new JLabel("Containing:");
+        search = new JTextField();
 
         //formatting scroll pane
         Label l = new Label("You have to login before you can view video game content!");
@@ -80,22 +95,39 @@ public class GameWikiPanel extends ImagePanel {
             }
         });
 
+        choices.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                populateAttrs_actionPerformed(e);
+            }
+        });
+
         //formatting basic query button
         queryBasic.setMaximumSize(new Dimension(100, 26));
         queryBasic.setMinimumSize(new Dimension(100, 26));
         queryBasic.setPreferredSize(new Dimension(100, 26));
         choicesPanel.add(queryBasic);
 
-        //formatting combo box and its label
-        JLabel choiceLabel = new JLabel();
-        choiceLabel.setText("Content:");
-        choicesPanel.add(choiceLabel);
+        //formatting choices combo box and its label
         choices.setMaximumSize(new Dimension(200, 26));
         choices.setMinimumSize(new Dimension(200, 26));
         choices.setPreferredSize(new Dimension(200, 26));
         choicesPanel.add(choiceLabel);
         choicesPanel.add(choices);
 
+        //formatting attributes combo box and its label
+        attrChoices.setMaximumSize(new Dimension(200, 26));
+        attrChoices.setMinimumSize(new Dimension(200, 26));
+        attrChoices.setPreferredSize(new Dimension(200, 26));
+        choicesPanel.add(attrLabel);
+        choicesPanel.add(attrChoices);
+
+        //formatting search field and label
+        search.setMaximumSize(new Dimension(200, 26));
+        search.setMinimumSize(new Dimension(200, 26));
+        search.setPreferredSize(new Dimension(200, 26));
+        choicesPanel.add(searchLabel);
+        choicesPanel.add(search);
 
         //adding the query button and choices combo box
         this.add(choicesPanel,BorderLayout.NORTH);
@@ -110,12 +142,33 @@ public class GameWikiPanel extends ImagePanel {
         this.repaint();
     }
 
+    private void populateAttrs_actionPerformed(ItemEvent e){
+        JComboBox tmpChoices = (JComboBox) e.getSource();
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            String[] tmp = tables.get("" + choices.getSelectedItem());
+            for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < attrs.get(tmp[i]).length; j++) {
+                    attrChoices.addItem(attrs.get(tmp[i])[j]);
+                }
+            }
+        }
+    }
+
     private void queryBasic_actionPerformed(ActionEvent e){
 
         //loading join conditions in LHM
         LinkedHashMap<String,String> jCon = new LinkedHashMap<>();
+        LinkedHashMap<String,String> attrCon;
         String[] tmp = tables.get(""+choices.getSelectedItem());
         ArrayList<String> attrTmp = new ArrayList<>();
+
+        //accomodating search specification
+        if(!search.getText().equals("")) {
+            attrCon = new LinkedHashMap<>();
+            attrCon.put(tmp[0] + ".name", search.getText());
+        }
+        else
+            attrCon = null;
 
         //loading attributes to select from schemas
         if(tmp.length == 1) {
@@ -143,7 +196,7 @@ public class GameWikiPanel extends ImagePanel {
 
         ResultSet queriedResults = gs.querry(new JoinSearchQuery(tmp
                 ,jCon
-                ,null
+                ,attrCon
                 , attrTmp.toArray(new String[attrTmp.size()])
                 ,tmp[0] + ".name",true));
         try {
