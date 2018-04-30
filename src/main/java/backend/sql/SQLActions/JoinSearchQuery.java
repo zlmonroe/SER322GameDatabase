@@ -15,10 +15,10 @@ public class JoinSearchQuery implements SQLAction {
         if(joinAll == null || on == null) {
             throw new IllegalArgumentException("Joins must not be null!");
         }
-       // if(!(joinAll.length == on.size()+1)) {
-         //   throw new IllegalArgumentException("Joins must match conditions! ("+joinAll
-           //         .length+"!="+(on.size()+1)+")");
-        //}
+        if(!(joinAll.length == on.size()+1)) {
+            throw new IllegalArgumentException("Joins must match conditions! ("+joinAll
+                    .length+"!="+(on.size()+1)+")");
+        }
 
         ArrayList<String> keys = new ArrayList<>(on.keySet());
 
@@ -46,8 +46,15 @@ public class JoinSearchQuery implements SQLAction {
             for (String key : values.keySet()) {
                 operator = i != values.size() - 1 ? operator : "";
                 System.out.println(i + " " + (values.size() - 1));
-                sql.append(key).append(" ILIKE '%").append(values.get(key)).append("%'").append
-                        (operator);
+                try {
+                    int numVal = Integer.parseInt(values.get(key));
+                    sql.append(key).append(" = ").append(numVal).append(operator);
+                    System.out.println("Integer value found.");
+                }
+                catch (NumberFormatException e){
+                    sql.append(key).append(" ILIKE '%").append(values.get(key)).append("%'").append(operator);
+                    System.out.println("String value found.");
+                }
                 i++;
             }
         }
