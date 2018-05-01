@@ -4,8 +4,9 @@ Game Wiki Database.</br>
 
 To use our program, you will need:</br>
 Java 8 SDK</br>
-Postgres SQL Server with postgres user on default port</br>
+Postgres SQL Server with postgres user on default port 5432</br>
 Gradle installed</br>
+
 
 run from the command line using:</br>
 >>gradle rungui -Ppassword="['SQL_PASSWORD_HERE']"</br>
@@ -20,9 +21,21 @@ timCuprak</br>
 
 since he does not have alec as a friend (testing add friend).</br>
 
-From there view any panel. Including characters, add new player, etc.</br>
+From there view any panel. Including:</br>
+"My Profile"</br>
+Basic account info</br>
+"My Characters"</br>
+A breakdown of your characters</br>
+"Community"</br>
+Look for new friends and query info about your current ones</br>
+"Game Wiki"</br>
+Look up things about the game</br>
 
 
+
+Resource Documents:</br>
+These scripts are the sql versions of what the java generates. They are available inside the 
+resource page</br>
 </br>
 There are 4 scripts that have to do with initializing/maintaining the db.</br>
 These are:</br>
