@@ -13,12 +13,13 @@ import gui.general.SearchField;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Label;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Objects;
+import java.io.InputStream;
+import java.io.Reader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.sql.*;
+import java.sql.Date;
+import java.util.*;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -34,8 +35,11 @@ public class CommunityPanel extends ImagePanel {
     private JPanel top;
     private JScrollPane characterScroller;
     private PromptTextField name, item, quests, skills;
+    private SearchField s;
     private JRadioButton friendButton, allButton;
     private JButton go;
+    private ResultSet tmpPlayers;
+
     public CommunityPanel() {
         top = new JPanel();
         top.setMaximumSize(new Dimension(999999,10));
@@ -62,19 +66,23 @@ public class CommunityPanel extends ImagePanel {
         top.add(skills);
         top.add(go);
 
-        SearchField s = new SearchField("PLAYERS", "username");
+        s = new SearchField("PLAYERS", "username");
         JButton addFriend = new JButton("Add Friend");
         addFriend.addActionListener(e -> {
-            if(CurrentContext.getPlayer() != null) {
-                GameServer gs = CurrentContext.getGameServer();
-                gs.execute(new NoFailInsertFriends(CurrentContext.getPlayer().getUsername(),
-                        (String) s.getEditor().getItem()));
-            }
-            else {
-                JOptionPane.showMessageDialog(null,"You have to log in first!",
-                        "Not yet logged in!",
-                        JOptionPane.ERROR_MESSAGE);
-            }
+                if (CurrentContext.getPlayer() != null) {
+                    GameServer gs = CurrentContext.getGameServer();
+                    boolean errorFound = gs.execute(new NoFailInsertFriends(CurrentContext.getPlayer().getUsername(),
+                            (String) s.getEditor().getItem()));
+                    if(!errorFound){
+                        JOptionPane.showMessageDialog(null, "The text you entered does relate to any existing player's name!",
+                                "Player does not exist!",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "You have to log in first!",
+                            "Not yet logged in!",
+                            JOptionPane.ERROR_MESSAGE);
+                }
         });
         top.add(s);
         top.add(addFriend);

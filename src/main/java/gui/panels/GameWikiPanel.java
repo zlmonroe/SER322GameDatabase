@@ -104,7 +104,6 @@ public class GameWikiPanel extends ImagePanel {
             attrChoices.addItem(attrs.get(tmp[0])[i]);
         }
 
-
         //adding button listener
         queryBasic.addActionListener(new AbstractAction() {
             @Override
@@ -234,6 +233,7 @@ public class GameWikiPanel extends ImagePanel {
                 }
             }
         }
+
         if(tmp.length > 1) {
             if(tmp[0].equals("ITEM")) {
                 jCon.put(tables.get("" + choices.getSelectedItem())[0] + ".name", tables.get("" + choices.getSelectedItem())[1] + ".item");
@@ -246,7 +246,6 @@ public class GameWikiPanel extends ImagePanel {
                     jCon.put(tables.get("" + choices.getSelectedItem())[0] + ".name", tables.get("" + choices.getSelectedItem())[i] + "." + tmp[0].toLowerCase());
             }
         }
-
 
         ResultSet queriedResults = gs.querry(new JoinSearchQuery(tmp
                 ,jCon
