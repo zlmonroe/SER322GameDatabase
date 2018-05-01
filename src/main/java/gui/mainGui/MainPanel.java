@@ -35,8 +35,8 @@ public class MainPanel extends JPanel {
 
         home = new HomePanel(this);
         signup = new SignupPanel(this);
-        profile = new ProfilePanel();
-        profileEdit = new ProfileEditPanel();
+        profile = new ProfilePanel(this);
+        profileEdit = new ProfileEditPanel(this);
         characters = new MyCharactersPanel();
         community = new CommunityPanel();
         wiki = new GameWikiPanel();
@@ -69,10 +69,12 @@ public class MainPanel extends JPanel {
     }
 
     public void refresh() throws IOException {
-        profile = new ProfilePanel();
+        profile = new ProfilePanel(this);
+        profileEdit = new ProfileEditPanel(this);
         characters = new MyCharactersPanel();
         signup = new SignupPanel(this);
         this.add(profile, "PROFILE");
+        this.add(profileEdit, "EDIT");
         this.add(characters, "CHARACTERS");
         this.add(signup, "SIGNUP");
         ((CommunityPanel)this.community).updateSQL();

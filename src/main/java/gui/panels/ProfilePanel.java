@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -24,15 +27,20 @@ import javax.swing.border.Border;
 import backend.CurrentContext;
 import backend.Player;
 import gui.general.ImagePanel;
+import gui.mainGui.MainPanel;
 //Profile and account info of the player logged in
 public class ProfilePanel extends ImagePanel {
+    
+    JTextField userNameF;
+    JTextField startDateF;
+    JTextField balanceF;
 
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
 
-    public ProfilePanel() throws IOException {
+    public ProfilePanel(MainPanel mp) throws IOException {
         this.setBackground(new Color(28,152,93));
 
         Player player = CurrentContext.getPlayer();
@@ -40,10 +48,6 @@ public class ProfilePanel extends ImagePanel {
         JLabel userNameL= new JLabel("Username:");
         JLabel startDateL = new JLabel("Start Date:");
         JLabel balanceL = new JLabel("Balance:");
-
-        JTextField userNameF;
-        JTextField startDateF;
-        JTextField balanceF;
 
         if(player != null) {
             userNameF = new JTextField(player.getUsername());
@@ -66,6 +70,14 @@ public class ProfilePanel extends ImagePanel {
         userNameF.setColumns(8);
         startDateF.setColumns(8);
         balanceF.setColumns(8);
+        
+        JButton edit = new JButton("Edit");
+        edit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                mp.switchPanel("EDIT");
+            }
+        });
 
         JPanel accountInfo = new JPanel();
 
@@ -79,6 +91,9 @@ public class ProfilePanel extends ImagePanel {
         con.gridx = 1;
         con.gridy = 0;
         accountInfo.add(userNameF, con);
+        con.gridx = 2;
+        con.gridy = 0;
+        accountInfo.add(edit, con);
         con.gridx = 0;
         con.gridy = 1;
         accountInfo.add(startDateL, con);
