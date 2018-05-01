@@ -8,7 +8,7 @@ package backend.sql.tables;
 public class QuestsTable extends Table {
 
     public QuestsTable() {
-        super("Quests", "name",
+        super("Quest", "name",
                 new String[] {
                         "name VARCHAR(30) NOT NULL",
                         "minLevel INTEGER NOT NULL",

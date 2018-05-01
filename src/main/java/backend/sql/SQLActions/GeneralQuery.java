@@ -45,7 +45,7 @@ public class GeneralQuery implements SQLAction  {
         this(table,new String[]{attribute}, new String[]{value}, null);
     }
 
-    public  GeneralQuery(String table) {
+    public GeneralQuery(String table) {
         this(table, null, null, null);
     }
 

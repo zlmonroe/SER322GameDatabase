@@ -14,7 +14,7 @@ public class ConsumableTable extends Table {
                         "coolDown INTEGER"},
                         new LinkedHashMap<String,String>() {
                         {
-                            put("name", "ITEMS(name)");
+                            put("name", "ITEM(name)");
                         }
                 },
                 new String[] {

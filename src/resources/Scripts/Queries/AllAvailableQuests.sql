@@ -5,7 +5,7 @@
  * the currently selected schema (first in the search path)
 */
 SELECT Q.name
-FROM Quests Q
+FROM Quest Q
 WHERE Q.Name IN
     (Select Q2.Quest
     FROM QuestLocation Q2

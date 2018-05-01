@@ -16,7 +16,7 @@ public class CharacterQuestsTable extends Table {
                 new LinkedHashMap<String, String>(){
             {
                 put("playerCharacter","PLAYERCHAR(name)");
-                put("quest","QUESTS(name)");
+                put("quest","QUEST(name)");
             }
         },
                 new String[] {

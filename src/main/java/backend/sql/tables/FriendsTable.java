@@ -11,7 +11,7 @@ public class FriendsTable extends Table{
         super("FRIENDSWITH", "username, friendName",
                 new String[]{
                         "username VARCHAR(20) NOT NULL",
-                        "friendName VARCHAR(20) NOT NULL CHECK(friendName <> username)",
+                        "friendName VARCHAR(20) NOT NULL CHECK(friendName <> username)"
                 }, new LinkedHashMap<String, String>() {
                     {
                         put("username", "PLAYERS(username)");
