@@ -29,14 +29,15 @@ public abstract class Table implements SQLAction {
         StringBuilder sql = new StringBuilder();
         sql.append("CREATE TABLE ").append(tableName.toUpperCase()).append("(\n");
         for(String key: keys) {
+            String keyN = key.split("\\s+")[0];
             sql.append("\t").append(key);
-            if (foreingKeys!=null && foreingKeys.keySet().contains(key)) {
-                sql.append(" REFEREENCES ").append(foreingKeys.get(key));
+            if (foreingKeys!=null && keyN!=null && foreingKeys.containsKey(keyN)) {
+                sql.append(" REFERENCES ").append(foreingKeys.get(keyN));
             }
             sql.append(",\n");
         }
         sql.append("\tPRIMARY KEY(").append(primaryKey).append(")\n);");
-
+        System.out.println(sql.toString());
         return sql.toString();
     }
 
