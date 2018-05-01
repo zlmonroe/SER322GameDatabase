@@ -59,30 +59,8 @@ public class Player {
 		return password;
 	}
 
-	/**
-	 * sets the player's password. Ensures that the player knows their old password
-	 * @param password new password 
-	 * @param originalPassword old password for checking
-	 * @return
-	 */
-	public boolean setPassword(String password, String originalPassword) {
-		if(originalPassword.equals(this.password)) {
-			this.password = password;
-			return true;
-		}
-		return false;
-	}
-
 	public double getBalance() {
 		return balance;
-	}
-
-	/**
-	 * adds to the user balance
-	 * @param money amount of money to add
-	 */
-	public void addBalance(double money) {
-		this.balance += money;
 	}
 
 	public LocalDate getStartDate() {
@@ -93,7 +71,19 @@ public class Player {
 		return friends;
 	}
 	
-	/**
+	public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    /**
 	 * adds a new character to the character list
 	 * @param characterName add params as required
 	 */
@@ -131,7 +121,7 @@ public class Player {
 	 * @param newVal value replacing attr's current value
 	 */
 	public void editPlayer(String attr, String newVal) {
-		Update update = new Update("PLAYERS", username, attr, newVal);
+		Update update = new Update("PLAYERS", "'" +username+ "'", attr, newVal);
 		gs.execute(update);
 	}
 

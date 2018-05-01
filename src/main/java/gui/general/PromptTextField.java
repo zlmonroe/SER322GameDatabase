@@ -25,7 +25,7 @@ public class PromptTextField extends JTextField {
         this.setFont(new Font(this.getFont().getName(), Font.BOLD, 30));
         transparent = false;
     }
-
+    
     public PromptTextField(String p, String i) {
         prompt = p;
         initText = i;

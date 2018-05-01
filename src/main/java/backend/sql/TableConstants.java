@@ -6,6 +6,6 @@ package backend.sql;
 public final class TableConstants {
     public static final String[] TABLES = new String[]{"SKILLEFFECT", "HASSKILL", "CHARACTERQUEST",
             "DISCOVERED", "ITEMEFFECT", "HASITEM", "SKILL", "QUESTLOCATION", "LOCATIONS", "EFFECT",
-            "QUESTS", "NONPLAYERCHAR", "PLAYERCHAR", "CHARACTER", "WEAPON", "ARMOR", "CONSUMABLE",
+            "QUEST", "NONPLAYERCHAR", "PLAYERCHAR", "CHARACTER", "WEAPON", "ARMOR", "CONSUMABLE",
             "ITEM", "FRIENDSWITH", "PLAYERS", };
 }

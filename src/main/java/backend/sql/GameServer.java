@@ -205,7 +205,7 @@ public class GameServer {
         GeneralQuery q2 =new GeneralQuery("Players", "username", "tjcuprak");
         GeneralQuery q3 =new GeneralQuery("Players", attrs, values, "OR");
 
-        System.out.println(q1.getAction()+"\n");
+        System.out.println(q1.getAction()+"hey\n");
         System.out.println(q1.getFunction()+"\n");
 
         System.out.println(q2.getAction()+"\n");
@@ -245,7 +245,7 @@ public class GameServer {
         String[] searches = new String[]{"friendname", "item"};
 
         SQLAction jsq = new JoinSearchQuery(tables, joinConditions, attrConditions, searches,
-                "friendname");
+                "friendname",false);
         ResultSet joinRs = gs.querry(jsq);
         while(joinRs.next()) {
             System.out.println(joinRs.getString("friendname")+"\t|\t"+joinRs.getString

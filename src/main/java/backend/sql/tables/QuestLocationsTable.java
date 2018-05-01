@@ -14,7 +14,7 @@ public class QuestLocationsTable extends Table {
                         "location VARCHAR(30) NOT NULL"},
                 new LinkedHashMap<String,String>(){
                         {
-                            put("quest","QUESTS(name)");
+                            put("quest","QUEST(name)");
                             put("location","LOCATIONS(name)");
                         }
                 },

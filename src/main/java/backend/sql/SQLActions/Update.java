@@ -25,6 +25,6 @@ public class Update implements SQLAction{
 
     @Override
     public String getFunction() {
-        return "Updates attribute " + attr + " value in " + tableName;
+        return "Updates attribute " + attr + " to " + newVal + "for player " + username + " in " + tableName;
     }
 }

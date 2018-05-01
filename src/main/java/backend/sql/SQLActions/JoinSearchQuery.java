@@ -11,7 +11,7 @@ public class JoinSearchQuery implements SQLAction {
 
     public JoinSearchQuery(String[]joinAll, LinkedHashMap<String, String> on,
                            LinkedHashMap<String, String> values, String[] searches,
-                           String orderBy) {
+                           String orderBy, boolean leftCondSame) {
         if(joinAll == null || on == null) {
             throw new IllegalArgumentException("Joins must not be null!");
         }
@@ -29,23 +29,34 @@ public class JoinSearchQuery implements SQLAction {
             sql.append(", ").append(searches[i]);
         }
 
-        sql.append(" FROM ").append(joinAll[0]);
+        sql.append("\nFROM ").append(joinAll[0]);
 
         for(int i = 0; i < joinAll.length - 1; i++) {
-            sql.append("\nFULL OUTER JOIN ").append(joinAll[i+1]).append(" ON ").append(keys.get(i))
+            if(leftCondSame)
+                sql.append("\nFULL OUTER JOIN ").append(joinAll[i+1]).append(" ON ").append(keys.get(0))
+                        .append(" = ").append(on.get(keys.get(i)));
+            else
+                sql.append("\nFULL OUTER JOIN ").append(joinAll[i+1]).append(" ON ").append(keys.get(i))
                     .append(" = ").append(on.get(keys.get(i)));
         }
-
-        sql.append("\nWHERE\n");
-
-        String operator = " AND\n";
-        int i = 0;
-        for(String key : values.keySet()) {
-            operator = i!=values.size()-1 ? operator:"";
-            System.out.println(i+" "+(values.size()-1));
-            sql.append(key).append(" ILIKE '%").append(values.get(key)).append("%'").append
-                    (operator);
-            i++;
+        if(values != null) {
+            sql.append("\nWHERE ");
+            String operator = " AND\n";
+            int i = 0;
+            for (String key : values.keySet()) {
+                operator = i != values.size() - 1 ? operator : "";
+                System.out.println(i + " " + (values.size() - 1));
+                try {
+                    int numVal = Integer.parseInt(values.get(key));
+                    sql.append(key).append(" = ").append(numVal).append(operator);
+                    System.out.println("Integer value found.");
+                }
+                catch (NumberFormatException e){
+                    sql.append(key).append(" ILIKE '%").append(values.get(key)).append("%'").append(operator);
+                    System.out.println("String value found.");
+                }
+                i++;
+            }
         }
         sql.append("\nORDER BY ").append(orderBy).append(";");
         this.query = sql.toString();
